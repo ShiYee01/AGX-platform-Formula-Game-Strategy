@@ -1,0 +1,12 @@
+folder,job_id,seed,track,seat_0_based,qualifying_position,race_position,laps,status,pit_stops,decisions,faults
+1,336be965-1054-495b-8083-a6259fd2022f,1242689357,Crossover,5,8,3,3,running,0,26559,0
+2,707202ab-d576-4564-8af0-db8541d634ec,1724314289,Crossover,1,9,3,3,running,0,25326,0
+3,53e5a347-1efc-4b5c-8701-70d46553827d,1594748583,Parkland,5,10,10,3,disqualified,0,19532,0
+4,e1212f05-0295-44c8-a121-c5bb7cdfbb52,1967676662,Crossover,8,7,9,0,unclassified,0,6623,0
+5,5f149fca-4e4e-4739-90e4-40316e602c22,1872434440,Highland,7,9,9,0,unclassified,0,8411,0
+6,f7c94834-bbeb-4969-beb2-65ca212111dd,1158927071,Crossover,0,3,3,3,running,0,25288,0
+7,da4cb1c2-2d42-4c2c-bd57-dba87f945d11,1660044929,Crossover,7,9,4,3,running,0,26324,0
+8,f7aa0199-43b7-4d47-aaed-2a03d56c91ef,1183906808,Crossover,7,9,3,3,running,0,26163,0
+9,9bd26dcd-fb37-4d8a-ae16-95d40a00d3cd,1402511248,Highland,5,10,10,0,unclassified,0,8555,0
+10,2afe1933-1c7c-491e-80f6-df5368318677,1459928990,Crossover,9,9,10,0,unclassified,0,5870,0
+11,10cfd536-1fbc-458f-a327-7d14abbab4b4,1663893174,Parkland,1,10,5,3,finished,0,20536,0

@@ -22,7 +22,14 @@ def fit(path, game):
     with path.open() as stream:
         for line in stream:
             row = json.loads(line)
-            if row.get('type') != 'decision' or row.get('fault'):
+            # v2 exports preserve original decision bytes: observation/action
+            # rows may have no type field. Metadata/outcome are not decisions.
+            if row.get('type') == 'metadata':
+                groups.clear()
+            if (row.get('type') not in (None, 'decision')
+                    or 'observation' not in row or row.get('fault')):
+                if row.get('fault'):
+                    groups.clear()
                 continue
             o, a = row['observation'], row.get('applied_action') or row.get('action') or {}
             car = o.get('me' if game == 'fps' else 'self', {})
@@ -33,14 +40,15 @@ def fit(path, game):
             t = tick/60 if game == 'fps' and tick is not None else o.get('time')
             if not isinstance(t, (int, float)) or not math.isfinite(t):
                 continue
-            key = (row.get('leg', 0), row.get('seat', 0), o.get('phase'), o.get('round_index'))
+            key = (row.get('leg', 0), row.get('seat', 0), o.get('phase'), o.get('round_index'),
+                   o.get('track_length_m'), o.get('weather', {}).get('condition'), car.get('compound'))
             before = groups.get(key)
             groups[key] = (t, car, a)
             if before is None:
                 continue
             t0, prev, prev_action = before
             dt = t-t0
-            if not 0 < dt < 1 or any(not isinstance(car.get(k), (int, float)) for k in ('x', 'y')):
+            if not 0 < dt < 1 or any(not isinstance(c.get(k), (int, float)) for c in (prev, car) for k in ('x', 'y')):
                 continue
             if game == 'fps':
                 dx, dy = car['x']-prev['x'], car['y']-prev['y']
@@ -48,7 +56,7 @@ def fit(path, game):
                 # Exclude stationary samples and round-reset/teleport outliers.
                 if speed > 0.05:
                     measurements['speed'].append(speed)
-            elif car.get('pit_state') is None or not car.get('pit_state'):
+            elif not car.get('pit_state') and not prev.get('pit_state'):
                 v, v0 = car.get('speed_mps'), prev.get('speed_mps')
                 if not isinstance(v, (int, float)) or not isinstance(v0, (int, float)):
                     continue
@@ -63,6 +71,8 @@ def fit(path, game):
                     measurements['lateral'].append(v*v*abs(preview[0][1]))
                 if all(isinstance(c.get('ers_soc_mj'), (int, float)) for c in (prev, car)):
                     measurements['energy'].append(max(0, prev['ers_soc_mj']-car['ers_soc_mj'])/dt)
+            else:
+                continue
             count += 1
     def quantile(key, q):
         values = np.asarray(measurements[key], dtype=float)

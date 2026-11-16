@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+training*.jsonl
+public-events.jsonl
+logs/
+submission*.zip
+fitted*.json
+profile*.npz

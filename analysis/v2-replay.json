@@ -1,0 +1,465 @@
+{
+  "method": "Fixed-observation replay; NOT closed-loop evaluation or ranking prediction.",
+  "agent_sha256": "74ba0411575a2c1e571f7915dd6566cafda8396b77da7f59bb9596ab10747304",
+  "total_decisions": 199187,
+  "matches": [
+    {
+      "number": 1,
+      "decisions": 26559,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 25415,
+      "candidate_cpu_seconds": 0.652964999999996,
+      "max_call_cpu_ms": 0.13099999999999223,
+      "mean_call_cpu_us": 24.58545125945992,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.785265622892231,
+      "old_pit_request_count": 6208,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": {
+        "elapsed": 427.53330000000005,
+        "lap": 2,
+        "s": 1.189,
+        "line": 19485
+      },
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": -0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": -0.0006913333333333334,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": 3.5,
+        "v2_offset": 3.5
+      }
+    },
+    {
+      "number": 2,
+      "decisions": 25326,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 24179,
+      "candidate_cpu_seconds": 0.5960229999999842,
+      "max_call_cpu_ms": 0.11699999999992272,
+      "mean_call_cpu_us": 23.5340361683639,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.7819374708417921,
+      "old_pit_request_count": 5846,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": {
+        "elapsed": 431.23339999999985,
+        "lap": 2,
+        "s": 1.25,
+        "line": 18363
+      },
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": 3.4000000000000007e-05,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 3,
+      "decisions": 19532,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 18767,
+      "candidate_cpu_seconds": 0.47231300000002197,
+      "max_call_cpu_ms": 0.11899999999975819,
+      "mean_call_cpu_us": 24.181497030515153,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.8000000000000067,
+      "old_pit_request_count": 4729,
+      "new_pit_request_count": 275,
+      "first_old_pit_request": {
+        "elapsed": 318.5667000000001,
+        "lap": 2,
+        "s": 0.935,
+        "line": 14697
+      },
+      "first_new_pit_request": {
+        "elapsed": 312.20000000000005,
+        "lap": 1,
+        "s": 5515.962,
+        "line": 14506
+      },
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": -0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.005020666666666666,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": 3.5,
+        "v2_offset": 3.5
+      }
+    },
+    {
+      "number": 4,
+      "decisions": 6623,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 6372,
+      "candidate_cpu_seconds": 0.1449340000000685,
+      "max_call_cpu_ms": 0.128000000000128,
+      "mean_call_cpu_us": 21.883436509145177,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.8000000000000004,
+      "old_pit_request_count": 0,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": null,
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": 6.800000000000001e-05,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 5,
+      "decisions": 8411,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 8078,
+      "candidate_cpu_seconds": 0.18815499999997432,
+      "max_call_cpu_ms": 0.11899999999975819,
+      "mean_call_cpu_us": 22.370110569489277,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.8000000000000067,
+      "old_pit_request_count": 0,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": null,
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": -0.00011333333333333334,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 6,
+      "decisions": 25288,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 24123,
+      "candidate_cpu_seconds": 0.6519389999999534,
+      "max_call_cpu_ms": 0.128000000000128,
+      "mean_call_cpu_us": 25.780567858270857,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.8000000000000014,
+      "old_pit_request_count": 6191,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": {
+        "elapsed": 428.86670000000026,
+        "lap": 2,
+        "s": 0.126,
+        "line": 18254
+      },
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": 0.0006006666666666667,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 7,
+      "decisions": 26324,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 25387,
+      "candidate_cpu_seconds": 0.6942169999998233,
+      "max_call_cpu_ms": 0.15699999999974068,
+      "mean_call_cpu_us": 26.372017930399,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.800000000000002,
+      "old_pit_request_count": 6197,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": {
+        "elapsed": 428.4667000000002,
+        "lap": 2,
+        "s": 0.063,
+        "line": 19278
+      },
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": 3.4000000000000007e-05,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 8,
+      "decisions": 26163,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 24996,
+      "candidate_cpu_seconds": 0.6721460000000583,
+      "max_call_cpu_ms": 0.1249999999988205,
+      "mean_call_cpu_us": 25.69070825211399,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.7867014774302459,
+      "old_pit_request_count": 6186,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": {
+        "elapsed": 415.20000000000005,
+        "lap": 2,
+        "s": 0.873,
+        "line": 18719
+      },
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": 3.4000000000000007e-05,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 9,
+      "decisions": 8555,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 8223,
+      "candidate_cpu_seconds": 0.2013299999998388,
+      "max_call_cpu_ms": 0.0800000000005241,
+      "mean_call_cpu_us": 23.533606078297932,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.8000000000000002,
+      "old_pit_request_count": 0,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": null,
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": -0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 0.65,
+          "brake": 0.0,
+          "steer": 0.00011333333333333334,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": 3.5,
+        "v2_offset": 3.5
+      }
+    },
+    {
+      "number": 10,
+      "decisions": 5870,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 5656,
+      "candidate_cpu_seconds": 0.1305100000000241,
+      "max_call_cpu_ms": 0.07699999999921658,
+      "mean_call_cpu_us": 22.233390119254533,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.7750872386756493,
+      "old_pit_request_count": 0,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": null,
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 3.4000000000000007e-05,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": -3.5,
+        "v2_offset": -3.5
+      }
+    },
+    {
+      "number": 11,
+      "decisions": 20536,
+      "baseline_parity": true,
+      "candidate_contract": true,
+      "changed_decisions": 19772,
+      "candidate_cpu_seconds": 0.43380499999999067,
+      "max_call_cpu_ms": 0.10499999999957765,
+      "mean_call_cpu_us": 21.124123490455332,
+      "max_target_mps": 55.0,
+      "max_lane_target_slew_mps": 0.800000000000002,
+      "old_pit_request_count": 5034,
+      "new_pit_request_count": 0,
+      "first_old_pit_request": {
+        "elapsed": 345.7333000000001,
+        "lap": 2,
+        "s": 0.947,
+        "line": 15397
+      },
+      "first_new_pit_request": null,
+      "first_race_actions": {
+        "v1": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": -0.15,
+          "ers_mode": 2,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "v2": {
+          "throttle": 1.0,
+          "brake": 0.0,
+          "steer": 0.005020666666666666,
+          "ers_mode": 1,
+          "aero_mode": 0,
+          "pit_request": false,
+          "pit_compound": "medium"
+        },
+        "grid_n": 3.5,
+        "v2_offset": 3.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "approximation": true,
+  "game": "racing",
+  "pairs": 25689,
+  "parameters": {
+    "lateral": 5.39958795549968,
+    "brake": 11.174467281662668,
+    "accel": 6.684873496240954,
+    "speed_cap": 44.573660000000004,
+    "energy_mj_per_s": 0.18018018018111262
+  },
+  "samples": {
+    "speed": 25689,
+    "lateral": 25686,
+    "brake": 384,
+    "accel": 4695,
+    "energy": 25689
+  },
+  "note": "Effective observed envelopes, not physical identification. Missing parameters stay null; collect relevant actions or supply your own estimate. / 仅为观测包络，缺失参数需补采样或自行估计。"
+}

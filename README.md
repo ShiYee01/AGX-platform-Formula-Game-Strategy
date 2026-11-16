@@ -1,5 +1,21 @@
 # AGX Racing local optimisation kit / 本地优化工具包
 
+## 本项目的 V2 迭代（2026-11-16）
+
+当前 `agent/` 是根据 11 场 V1 对局日志修改的 V2 候选，真实比赛效果待验证。
+原始两文件保存在 `baselines/v1/`；日志分析见 [日志分析报告](docs/日志分析报告.md)，
+修改依据与验证边界见 [代码修改理由](docs/代码修改理由.md)。
+
+运行回归测试：`python3 -m unittest discover -s tests -v`。
+当前车手不读取地图权重，可用标准库打包两文件：
+
+```sh
+python3 tools/build_submission.py --output submission-v2.zip --manifest submission-v2.manifest.json
+```
+
+原始本人日志保留在本地，不提交到 GitHub 或赛车 ZIP。以下保留原工具包说明；
+其中 `sim/` 是近似模型，运行它不会自动修改当前车手。
+
 赛车策略保留 PPT 原版。
 The racing policy is the original PPT example.
 
