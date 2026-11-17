@@ -1,16 +1,33 @@
 # AGX Racing local optimisation kit / 本地优化工具包
 
-## 本项目的 V2 迭代（2026-11-16）
+## 本项目的 V3 迭代（2026-11-17）
 
-当前 `agent/` 是根据 11 场 V1 对局日志修改的 V2 候选，真实比赛效果待验证。
-原始两文件保存在 `baselines/v1/`；日志分析见 [日志分析报告](docs/日志分析报告.md)，
-修改依据与验证边界见 [代码修改理由](docs/代码修改理由.md)。
+当前 `agent/` 是只修交通与超车的 V3 主版；`experiments/v3-corner/` 是独立弯道补油试验版。
+V3 主版保留 V2 的车辆设计、55 m/s 目标上限、抓地/制动预算、进站与油门控制公式。
+原始两文件在 `baselines/v1/`，已参赛 V2 在 `baselines/v2/`。
+本轮依据与验证见 [V3 修改理由](docs/V3修改理由.md)，
+三张地图的弯段与油门分析见 [弯道分析](docs/三赛道弯道与油门分析.md)。
+之前的 V1 分析保留于 [日志分析报告](docs/日志分析报告.md) 和 [V2 修改理由](docs/代码修改理由.md)。
 
 运行回归测试：`python3 -m unittest discover -s tests -v`。
 当前车手不读取地图权重，可用标准库打包两文件：
 
 ```sh
-python3 tools/build_submission.py --output submission-v2.zip --manifest submission-v2.manifest.json
+python3 tools/build_submission.py --output submission-v3.zip --manifest submission-v3.manifest.json
+```
+
+独立试验版（先验证主版，再对照测试）：
+
+```sh
+python3 tools/build_corner_experiment.py
+python3 tools/build_submission.py --agent-dir experiments/v3-corner --output submission-v3-corner.zip --manifest submission-v3-corner.manifest.json
+```
+
+历史输入和简化交通反馈检查：
+
+```sh
+python3 tools/validate_v3.py /Users/syeah/Downloads/Formula --max-folder 18 --output analysis/v3-validation
+python3 tools/analyze_corners.py /Users/syeah/Downloads/Formula --output analysis/v3-corners
 ```
 
 原始本人日志保留在本地，不提交到 GitHub 或赛车 ZIP。以下保留原工具包说明；

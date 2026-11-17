@@ -1,4 +1,4 @@
-"""V2 candidate: earlier tyre stops, gradual lane changes, distance-aware pace.
+"""V3 candidate: consistent traffic clearance and committed passing lanes.
 
 Uses public current observations and this seat's memory. No SDK/weights needed.
 Platform races are still required to establish a performance improvement.
@@ -10,6 +10,11 @@ TRACK_PITS = ((5795.843091436305, 5715.9313949727275),
               (6999.367280545016, 6609.507079216389),
               (5803.166698722436, 5355.31315011008))
 TOP_SPEED = 55.0  # Candidate cap; V1 lateral/braking budgets are retained.
+
+# Traffic geometry only: a chosen lane must clear the existing 2.8 m guard.
+TRAFFIC_CLEARANCE = 2.8
+PASS_LANE_MARGIN = 0.4
+PASS_LOST_HOLD_S = 1.0
 
 
 def clip(value, low, high):
@@ -70,6 +75,7 @@ class Driver:
         self.compounds = set()
         self.pass_seat = None
         self.pass_goal = 0.0
+        self.pass_seen_time = None
         self.diagnostic = {}
 
     def reset_phase(self, o):
@@ -80,6 +86,7 @@ class Driver:
         self.start_distance, self.start_time = c['distance'], o['time']
         self.wet_race, self.compounds = False, set()
         self.pass_seat, self.pass_goal = None, 0.0
+        self.pass_seen_time = None
 
     def choose_pit(self, o):
         c = o['self']
@@ -107,9 +114,11 @@ class Driver:
     def clear_sweep(self, o, goal, rivals):
         c = o['self']
         low, high = sorted((c['n'], goal))
-        horizon = min(3.0, abs(goal - c['n']) / 0.8 + 0.5)
+        # Cover the full requested lane change and settling time. The target
+        # still moves at 0.8 m/s, so a 3.2 m move takes over three seconds.
+        horizon = abs(goal - c['n']) / 0.8 + 0.5
         for r in rivals:
-            if not low - 2.6 < c['n'] + r['dn'] < high + 2.6:
+            if not low - TRAFFIC_CLEARANCE < c['n'] + r['dn'] < high + TRAFFIC_CLEARANCE:
                 continue
             gap = r['gap_m']
             future = gap + (r['speed_mps'] - c['speed_mps']) * horizon
@@ -131,21 +140,34 @@ class Driver:
         goal = clip(self.grid_n * (1.0 - blend), low, high)
         launching = progress < 380.0
         leaders = [r for r in rivals if 0.0 < r['gap_m'] < max(65.0, 2.5 * c['speed_mps'])
-                   and abs(c['n'] + r['dn'] - self.offset) < 2.8]
+                   and abs(c['n'] + r['dn'] - self.offset) < TRAFFIC_CLEARANCE]
         front = min(leaders, key=lambda r: r['gap_m'], default=None)
         straight = max(abs(row[1]) for row in o['preview']['rows'][:6]) < 0.002
         passing = next((r for r in rivals if r['seat'] == self.pass_seat), None)
-        if passing is not None and passing['gap_m'] > -12.0 and straight and not launching:
+        if passing is not None:
+            self.pass_seen_time = o['time']
+        holding_lost_target = (self.pass_seat is not None and passing is None
+                               and self.pass_seen_time is not None
+                               and o['time'] - self.pass_seen_time <= PASS_LOST_HOLD_S)
+        if (passing is not None and -12.0 < passing['gap_m'] < 65.0) or holding_lost_target:
+            # Hold the side through a bend or a brief visibility gap. Returning
+            # to centre waits for clearance. Abandon a target pulling far away;
+            # the same sweep guard still blocks an unsafe return merge.
             goal = clip(self.pass_goal, low, high)
         else:
             self.pass_seat = None
+            self.pass_seen_time = None
             if front and straight and not launching and 15.0 < front['gap_m'] < 50.0:
-                for candidate in sorted((-2.5, 2.5), key=lambda n: abs(n - self.offset)):
+                front_lane = c['n'] + front['dn']
+                spacing = TRAFFIC_CLEARANCE + PASS_LANE_MARGIN
+                candidates = (front_lane - spacing, front_lane + spacing)
+                for candidate in sorted(candidates, key=lambda n: abs(n - self.offset)):
                     if (low <= candidate <= high
-                            and abs(c['n'] + front['dn'] - candidate) > 2.6
+                            and abs(front_lane - candidate) > TRAFFIC_CLEARANCE
                             and self.clear_sweep(o, candidate, rivals)):
                         goal = self.pass_goal = candidate
                         self.pass_seat = front['seat']
+                        self.pass_seen_time = o['time']
                         break
         if abs(goal - self.offset) > 0.05 and not self.clear_sweep(o, goal, rivals):
             goal = self.offset  # Hold lane instead of merging into a car.
@@ -154,7 +176,7 @@ class Driver:
             if not 0.0 < r['gap_m'] < max(65.0, 2.5 * c['speed_mps']):
                 continue
             lateral = c['n'] + r['dn']
-            if min(abs(lateral - c['n']), abs(lateral - self.offset)) >= 2.8:
+            if min(abs(lateral - c['n']), abs(lateral - self.offset)) >= TRAFFIC_CLEARANCE:
                 continue
             closing = max(0.0, c['speed_mps'] - r['speed_mps'])
             braking = 7.0 * grip_budget(o)

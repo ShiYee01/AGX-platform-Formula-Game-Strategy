@@ -21,8 +21,9 @@ def reject_constant(value):
     raise ValueError('Non-finite JSON value: '+value)
 
 
-def build(output,manifest_path):
-    files={name:(ROOT/'agent'/name).read_bytes() for name in ('agent.py','design.json')}
+def build(output,manifest_path,agent_dir=None):
+    agent_dir = agent_dir or ROOT/'agent'
+    files={name:(agent_dir/name).read_bytes() for name in ('agent.py','design.json')}
     ast.parse(files['agent.py'].decode('utf-8'))
     design=json.loads(files['design.json'],object_pairs_hook=unique_object,parse_constant=reject_constant)
     if 'design' not in design or set(design)-{'design','rain_design'}:
@@ -55,4 +56,5 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--manifest',type=Path,required=True)
-    args=parser.parse_args();build(args.output,args.manifest)
+    parser.add_argument('--agent-dir',type=Path,help='Standalone agent folder; defaults to agent/')
+    args=parser.parse_args();build(args.output,args.manifest,args.agent_dir)
