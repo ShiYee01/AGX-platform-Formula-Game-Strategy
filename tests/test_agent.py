@@ -1,4 +1,4 @@
-"""Regression cases for the failures seen in the V1 race exports."""
+"""Frozen V2 regression cases for the failures seen in the V1 race exports."""
 import copy
 import importlib.util
 import json
@@ -7,7 +7,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location('racing_agent', ROOT / 'agent/agent.py')
+spec = importlib.util.spec_from_file_location('racing_agent', ROOT / 'baselines/v2/agent.py')
 agent = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(agent)
 

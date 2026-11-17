@@ -1,0 +1,1422 @@
+{
+  "method": "Recorded input action contracts and complete export hashes. These are not trajectories produced by the candidate, race results, or proof of finishing.",
+  "source_sha256": "b888ee5e2f379cfa0993261a374812e265ab525aebeb961a22d4e33d76750255",
+  "design_sha256": "8b6eea2a9a577dbbfbcf70de7453fb4e1d74b89b377dc97db3b9ca0389444059",
+  "total_decisions": 375644,
+  "matches": [
+    {
+      "folder": 1,
+      "job_id": "336be965-1054-495b-8083-a6259fd2022f",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 26559,
+      "map_valid": 26559,
+      "source_faults": 0,
+      "raw_bytes": 91162231,
+      "sha256": "416a3b7370f016c06e8e9f5b1dbcc04fcdc830b881f6772f83a16f2d45679942",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.3523730000000035
+    },
+    {
+      "folder": 2,
+      "job_id": "707202ab-d576-4564-8af0-db8541d634ec",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 25326,
+      "map_valid": 25326,
+      "source_faults": 0,
+      "raw_bytes": 88023459,
+      "sha256": "013b9da266dbc3d636e2aac49aa300232d1c0eab787b7066cb0c57c81943ae69",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.3303679999999878
+    },
+    {
+      "folder": 3,
+      "job_id": "53e5a347-1efc-4b5c-8701-70d46553827d",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 19532,
+      "map_valid": 19532,
+      "source_faults": 0,
+      "raw_bytes": 66309272,
+      "sha256": "d75fa8005727b8c59fdd4cfa267fb0cf2620207624b0ece99fde4bb1c2b25a45",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.27271000000001866
+    },
+    {
+      "folder": 4,
+      "job_id": "e1212f05-0295-44c8-a121-c5bb7cdfbb52",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 6623,
+      "map_valid": 6623,
+      "source_faults": 0,
+      "raw_bytes": 22039274,
+      "sha256": "ff5c5aabe3e7c001c44eea330cd76ab7af7ec1d230fb461a33e6923f03e90ecf",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.0751950000000079
+    },
+    {
+      "folder": 5,
+      "job_id": "5f149fca-4e4e-4739-90e4-40316e602c22",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 8411,
+      "map_valid": 8411,
+      "source_faults": 0,
+      "raw_bytes": 28054016,
+      "sha256": "7def435ed5ac0d623a80f289b9cdb2572958e6030a5fa797bb26d79fc2d89b71",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.11107699999999543
+    },
+    {
+      "folder": 6,
+      "job_id": "f7c94834-bbeb-4969-beb2-65ca212111dd",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 25288,
+      "map_valid": 25288,
+      "source_faults": 0,
+      "raw_bytes": 88139857,
+      "sha256": "534d492b028c88409f488b24b299c689a690cabe5d018914bc564b58ef965f72",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.35699999999997534
+    },
+    {
+      "folder": 7,
+      "job_id": "da4cb1c2-2d42-4c2c-bd57-dba87f945d11",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 26324,
+      "map_valid": 26324,
+      "source_faults": 0,
+      "raw_bytes": 92504782,
+      "sha256": "3b679e4dad821341f00b95e551d9ea3f54320dd2a60e37a96f7e26c5e797b144",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.3862540000000152
+    },
+    {
+      "folder": 8,
+      "job_id": "f7aa0199-43b7-4d47-aaed-2a03d56c91ef",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 26163,
+      "map_valid": 26163,
+      "source_faults": 0,
+      "raw_bytes": 87965554,
+      "sha256": "ba8b65fabf5218ad33e943a7bcee134876ee20793c9d5e48a4d0ddd7d5cc5301",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.36003499999998034
+    },
+    {
+      "folder": 9,
+      "job_id": "9bd26dcd-fb37-4d8a-ae16-95d40a00d3cd",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 8555,
+      "map_valid": 8555,
+      "source_faults": 0,
+      "raw_bytes": 28542674,
+      "sha256": "7a1e047b8bfd52c01965db9045a01a8e41a3950e3b33af83009cc60f3bcba6bb",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.10299500000002038
+    },
+    {
+      "folder": 10,
+      "job_id": "2afe1933-1c7c-491e-80f6-df5368318677",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 5870,
+      "map_valid": 5870,
+      "source_faults": 0,
+      "raw_bytes": 19362455,
+      "sha256": "678e6f8bebb6b2b7d9c655b039083b5e72566426707b062d033368c6eeebfe25",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.06792400000000143
+    },
+    {
+      "folder": 11,
+      "job_id": "10cfd536-1fbc-458f-a327-7d14abbab4b4",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 20536,
+      "map_valid": 20536,
+      "source_faults": 0,
+      "raw_bytes": 68140576,
+      "sha256": "c087f2c1cddff4f97542114ff170bbbfe835b8f535a214de4740c53d9ecdf606",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.2908359999999517
+    },
+    {
+      "folder": 12,
+      "job_id": "a193bcc7-9985-4f22-b5f3-dce17971b65a",
+      "recorded_version_id": "eb60e4b4-59c6-4459-9320-6e2546182862",
+      "decisions": 8122,
+      "map_valid": 8122,
+      "source_faults": 0,
+      "raw_bytes": 27108056,
+      "sha256": "5b541303c684a18d841db6e4b84f5b65f81b5ea5cd7b62b76060248ae369a824",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.10010100000000577
+    },
+    {
+      "folder": 13,
+      "job_id": "50209c49-51d1-44e9-8da6-fa05cf72bbc4",
+      "recorded_version_id": "41ceca59-9616-4483-992b-2af98c777467",
+      "decisions": 26406,
+      "map_valid": 26406,
+      "source_faults": 0,
+      "raw_bytes": 92253861,
+      "sha256": "ccc3e49f96d1c638c5d51fdf6903154b18a087ad22e34b813ea0394bf1ca29e3",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.4080159999998827
+    },
+    {
+      "folder": 14,
+      "job_id": "d6e6626d-df2d-48b7-9953-679025253592",
+      "recorded_version_id": "41ceca59-9616-4483-992b-2af98c777467",
+      "decisions": 21009,
+      "map_valid": 21009,
+      "source_faults": 0,
+      "raw_bytes": 73682715,
+      "sha256": "a8ce8be81a96a3014e36fc5a50529b1d011e067a1bed1390d89e583c73ee0c20",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.3549500000001551
+    },
+    {
+      "folder": 15,
+      "job_id": "04722bed-09ec-468d-a4a8-aec85ff6bf22",
+      "recorded_version_id": "41ceca59-9616-4483-992b-2af98c777467",
+      "decisions": 29508,
+      "map_valid": 29508,
+      "source_faults": 0,
+      "raw_bytes": 99215221,
+      "sha256": "3d3adc56f17161938e18f0bb489041730bc3318916033db2b8774824c7ef9734",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.4278150000000309
+    },
+    {
+      "folder": 16,
+      "job_id": "dd40ec38-28e2-4560-9d47-ce5ffd8c1dbc",
+      "recorded_version_id": "41ceca59-9616-4483-992b-2af98c777467",
+      "decisions": 24525,
+      "map_valid": 24525,
+      "source_faults": 0,
+      "raw_bytes": 84763355,
+      "sha256": "5006e126f72f1bba02c82c95fcb948833fa9d649f4c048e99c6c1e0ba0250853",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.397662000000123
+    },
+    {
+      "folder": 17,
+      "job_id": "74b0423f-1963-4f2c-a3fa-0c3796d485f7",
+      "recorded_version_id": "41ceca59-9616-4483-992b-2af98c777467",
+      "decisions": 21234,
+      "map_valid": 21234,
+      "source_faults": 0,
+      "raw_bytes": 73492526,
+      "sha256": "90d14405e0bbe9b17571c61af570aa87265b37bef13fcc25bcfff0f664499df7",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.3380070000000188
+    },
+    {
+      "folder": 18,
+      "job_id": "f78be2fe-72ed-4d5f-86bf-ab488de7e9f5",
+      "recorded_version_id": "41ceca59-9616-4483-992b-2af98c777467",
+      "decisions": 25461,
+      "map_valid": 25461,
+      "source_faults": 0,
+      "raw_bytes": 87191007,
+      "sha256": "a3fe24f408a41bb7b9d3e00d9f5d3a2bdbdd010655bc8d446a513ae65a47622e",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.4144159999999548
+    },
+    {
+      "folder": 19,
+      "job_id": "1688e1b3-89c6-4a12-a1cd-4e1492bc6e32",
+      "recorded_version_id": "c3db22dc-7e2e-4c14-beb6-4bf2da9a1426",
+      "decisions": 20192,
+      "map_valid": 20192,
+      "source_faults": 0,
+      "v3_recorded_action_parity": 20192,
+      "raw_bytes": 66923087,
+      "sha256": "4e175529819839a650dcb3da0d10d563e4fcf83288ef928b47039d11619334d5",
+      "integrity": true,
+      "action_contract": true,
+      "candidate_cpu_seconds": 0.30918400000006585
+    }
+  ],
+  "feedback_model": "Chosen force curves, tyre limits and delays with a 3.4m bicycle approximation. No rivals, damage accumulation, tyres, energy or pit engine; scenario times are not official lap predictions.",
+  "single_vehicle_scenarios": [
+    {
+      "track": "parkland",
+      "wet": 0.0,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 153.49999999999386,
+      "max_n": 2.3573059186819427,
+      "max_heading": 0.1208561382724187,
+      "min_road_margin": 3.92958618957978,
+      "end_s": 5795.853994424545
+    },
+    {
+      "track": "parkland",
+      "wet": 0.0,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 150.09999999999405,
+      "max_n": 0.32254084584395526,
+      "max_heading": 0.03762442386920721,
+      "min_road_margin": 5.992447102619558,
+      "end_s": 5796.092259770336
+    },
+    {
+      "track": "parkland",
+      "wet": 0.56,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 173.9999999999927,
+      "max_n": 2.5375824358223533,
+      "max_heading": 0.12297508724535533,
+      "min_road_margin": 3.9387533341024423,
+      "end_s": 5796.319076897956
+    },
+    {
+      "track": "parkland",
+      "wet": 0.56,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 169.83333333332627,
+      "max_n": 0.28874709085740285,
+      "max_heading": 0.035539999267229117,
+      "min_road_margin": 5.995270524908686,
+      "end_s": 5797.147304618739
+    },
+    {
+      "track": "parkland",
+      "wet": 1.0,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 200.9333333333245,
+      "max_n": 2.633830759446757,
+      "max_heading": 0.12285681270431319,
+      "min_road_margin": 3.915634355186463,
+      "end_s": 5797.2591848228185
+    },
+    {
+      "track": "parkland",
+      "wet": 1.0,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 196.33333333332476,
+      "max_n": 0.2625479453062034,
+      "max_heading": 0.034165556879851726,
+      "min_road_margin": 5.997367573983826,
+      "end_s": 5796.355278315698
+    },
+    {
+      "track": "highland",
+      "wet": 0.0,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 197.49999999999136,
+      "max_n": 2.618712460382803,
+      "max_heading": 0.11768658970214459,
+      "min_road_margin": 3.798689275217388,
+      "end_s": 6999.672120032214
+    },
+    {
+      "track": "highland",
+      "wet": 0.0,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 192.09999999999167,
+      "max_n": 0.11836241953626092,
+      "max_heading": 0.012230350099097783,
+      "min_road_margin": 5.92880562971552,
+      "end_s": 7000.259940421785
+    },
+    {
+      "track": "highland",
+      "wet": 0.56,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 226.86666666665636,
+      "max_n": 2.700768138094473,
+      "max_heading": 0.12245683686487568,
+      "min_road_margin": 3.7784609205608835,
+      "end_s": 6999.484835402954
+    },
+    {
+      "track": "highland",
+      "wet": 0.56,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 219.99999999999008,
+      "max_n": 0.09569174735177279,
+      "max_heading": 0.009815148416191436,
+      "min_road_margin": 5.941342423034559,
+      "end_s": 7000.600015292836
+    },
+    {
+      "track": "highland",
+      "wet": 1.0,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 263.03333333332694,
+      "max_n": 2.773670202234303,
+      "max_heading": 0.1225987756012385,
+      "min_road_margin": 3.7613085682513194,
+      "end_s": 7000.222775494784
+    },
+    {
+      "track": "highland",
+      "wet": 1.0,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 255.2333333333214,
+      "max_n": 0.07663331552421525,
+      "max_heading": 0.007822932658047673,
+      "min_road_margin": 5.95256028376114,
+      "end_s": 6999.687502506675
+    },
+    {
+      "track": "crossover",
+      "wet": 0.0,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 172.6333333333261,
+      "max_n": 3.6846893192103924,
+      "max_heading": 0.10369078873522034,
+      "min_road_margin": 3.8755367165550236,
+      "end_s": 5803.376946653804
+    },
+    {
+      "track": "crossover",
+      "wet": 0.0,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 169.0333333333263,
+      "max_n": 0.09658017066723269,
+      "max_heading": 0.0138004805498592,
+      "min_road_margin": 4.969233271853812,
+      "end_s": 5805.0473252408065
+    },
+    {
+      "track": "crossover",
+      "wet": 0.56,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 198.13333333332466,
+      "max_n": 3.828584768066273,
+      "max_heading": 0.11246441774272348,
+      "min_road_margin": 3.7555890180534863,
+      "end_s": 5804.960564573826
+    },
+    {
+      "track": "crossover",
+      "wet": 0.56,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 193.36666666665826,
+      "max_n": 0.08006087846249903,
+      "max_heading": 0.011340185400351397,
+      "min_road_margin": 4.977716940355655,
+      "end_s": 5804.907305846333
+    },
+    {
+      "track": "crossover",
+      "wet": 1.0,
+      "lat": 10.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 229.83333333332286,
+      "max_n": 3.937513021577979,
+      "max_heading": 0.121113504923908,
+      "min_road_margin": 3.6631198865017414,
+      "end_s": 5804.668837332161
+    },
+    {
+      "track": "crossover",
+      "wet": 1.0,
+      "lat": 12.0,
+      "lag": 0.12,
+      "initial_lane": 0,
+      "completed": true,
+      "seconds": 224.09999999998985,
+      "max_n": 0.06562612021615616,
+      "max_heading": 0.009297671481442333,
+      "min_road_margin": 4.985534635326498,
+      "end_s": 5804.2533170604775
+    }
+  ],
+  "traffic_scenarios": [
+    {
+      "parameters": {},
+      "result": {
+        "passed": true,
+        "returned": true,
+        "collision": false,
+        "max_n": 3.194216510569553,
+        "steps": 370,
+        "samples": [
+          {
+            "t": 0.0,
+            "gap": 35.0,
+            "n": 0.0,
+            "speed": 20.0,
+            "offset": -0.02666666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 0.5,
+            "gap": 33.98689440345508,
+            "n": -0.05599616709448246,
+            "speed": 23.800000000000008,
+            "offset": -0.4266666666666668,
+            "pass_seat": 1
+          },
+          {
+            "t": 1.0,
+            "gap": 31.570951123179956,
+            "n": -0.2739963805907491,
+            "speed": 25.197582823795056,
+            "offset": -0.8266666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 1.5,
+            "gap": 29.050846759293023,
+            "n": -0.5688028223348767,
+            "speed": 24.822043355002315,
+            "offset": -1.2266666666666661,
+            "pass_seat": 1
+          },
+          {
+            "t": 2.0,
+            "gap": 26.8166146883419,
+            "n": -0.9082068788922003,
+            "speed": 24.166519006285082,
+            "offset": -1.6266666666666652,
+            "pass_seat": 1
+          },
+          {
+            "t": 2.5,
+            "gap": 24.91473453728708,
+            "n": -1.2727562038133058,
+            "speed": 23.515346084376777,
+            "offset": -2.026666666666664,
+            "pass_seat": 1
+          },
+          {
+            "t": 3.0,
+            "gap": 23.322319311128226,
+            "n": -1.6515488117439046,
+            "speed": 22.93060179237801,
+            "offset": -2.426666666666665,
+            "pass_seat": 1
+          },
+          {
+            "t": 3.5,
+            "gap": 22.00226306354722,
+            "n": -2.038464550240599,
+            "speed": 22.422624759771786,
+            "offset": -2.8266666666666658,
+            "pass_seat": 1
+          },
+          {
+            "t": 4.0,
+            "gap": 20.91653781928177,
+            "n": -2.430075652949416,
+            "speed": 21.98867442511588,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 4.5,
+            "gap": 20.028001000003158,
+            "n": -2.7721617719943104,
+            "speed": 21.622219145045232,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.0,
+            "gap": 18.471598784508316,
+            "n": -2.9705884213265246,
+            "speed": 24.871348414513545,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.5,
+            "gap": 15.023019444833352,
+            "n": -3.0752722604861735,
+            "speed": 28.671348414513552,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.0,
+            "gap": 9.674120753184496,
+            "n": -3.131834942078578,
+            "speed": 32.47134841451356,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.5,
+            "gap": 2.4251418172923422,
+            "n": -3.1626030685565647,
+            "speed": 36.27134841451351,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.0,
+            "gap": -6.723850830074468,
+            "n": -3.186457575226526,
+            "speed": 40.071348414513466,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.5,
+            "gap": -17.772844561822353,
+            "n": -3.1833112363098706,
+            "speed": 43.87134841451342,
+            "offset": -2.986666666666667,
+            "pass_seat": null
+          },
+          {
+            "t": 8.0,
+            "gap": -30.721206834254332,
+            "n": -3.0162972126589103,
+            "speed": 47.671348414513375,
+            "offset": -2.586666666666666,
+            "pass_seat": null
+          },
+          {
+            "t": 8.5,
+            "gap": -45.568706365315705,
+            "n": -2.743055904881122,
+            "speed": 51.47134841451333,
+            "offset": -2.186666666666665,
+            "pass_seat": null
+          },
+          {
+            "t": 9.0,
+            "gap": -62.31566095593894,
+            "n": -2.4117034558266788,
+            "speed": 55.271348414513284,
+            "offset": -1.7866666666666655,
+            "pass_seat": null
+          },
+          {
+            "t": 9.5,
+            "gap": -80.82093258406775,
+            "n": -2.048918417479601,
+            "speed": 58.15325138085425,
+            "offset": -1.3866666666666665,
+            "pass_seat": null
+          },
+          {
+            "t": 10.0,
+            "gap": -100.22301869564603,
+            "n": -1.6696801525526583,
+            "speed": 59.21496889504407,
+            "offset": -0.9866666666666674,
+            "pass_seat": null
+          },
+          {
+            "t": 10.5,
+            "gap": -119.9168068381739,
+            "n": -1.2822381871848023,
+            "speed": 59.19153575270629,
+            "offset": -0.5866666666666676,
+            "pass_seat": null
+          },
+          {
+            "t": 11.0,
+            "gap": -139.48478873780857,
+            "n": -0.8883559280119291,
+            "speed": 59.41106256767852,
+            "offset": -0.18666666666666745,
+            "pass_seat": null
+          },
+          {
+            "t": 11.5,
+            "gap": -158.32100224253963,
+            "n": -0.5118379116150101,
+            "speed": 54.95819416493705,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 12.0,
+            "gap": -174.1894973473623,
+            "n": -0.285921981625783,
+            "speed": 49.23525045960515,
+            "offset": 0.0,
+            "pass_seat": null
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "initial_gap": 8.0,
+        "seconds": 60.0
+      },
+      "result": {
+        "passed": true,
+        "returned": true,
+        "collision": false,
+        "max_n": 3.187145570331079,
+        "steps": 501,
+        "samples": [
+          {
+            "t": 0.0,
+            "gap": 8.0,
+            "n": 0.0,
+            "speed": 20.0,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 0.5,
+            "gap": 8.713515942075855,
+            "n": 0.0,
+            "speed": 17.778683864076967,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 1.0,
+            "gap": 9.965941731369377,
+            "n": 0.0,
+            "speed": 17.407930834804628,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 1.5,
+            "gap": 11.205011393507593,
+            "n": 0.0,
+            "speed": 17.66744672927737,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 2.0,
+            "gap": 12.266137551360494,
+            "n": 0.0,
+            "speed": 18.0655825483544,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 2.5,
+            "gap": 13.13034456372597,
+            "n": 0.0,
+            "speed": 18.444019700574234,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 3.0,
+            "gap": 13.820457537181447,
+            "n": 0.0,
+            "speed": 18.76377382927862,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 3.5,
+            "gap": 14.36710370992509,
+            "n": 0.0,
+            "speed": 19.022853779032832,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 4.0,
+            "gap": 14.79864005120804,
+            "n": 0.0,
+            "speed": 19.229309554007106,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 4.5,
+            "gap": 15.138819696616139,
+            "n": -0.0036703428510022973,
+            "speed": 19.392702588316254,
+            "offset": -0.18666666666666745,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.0,
+            "gap": 15.407522341173802,
+            "n": -0.1113430444617176,
+            "speed": 19.521713703030596,
+            "offset": -0.5866666666666676,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.5,
+            "gap": 15.621521124066575,
+            "n": -0.35558203330702515,
+            "speed": 19.623926162140798,
+            "offset": -0.9866666666666674,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.0,
+            "gap": 15.792155694784853,
+            "n": -0.6704678939723668,
+            "speed": 19.705254946707523,
+            "offset": -1.3866666666666665,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.5,
+            "gap": 15.927972946750998,
+            "n": -1.023750752404147,
+            "speed": 19.770018785150928,
+            "offset": -1.7866666666666655,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.0,
+            "gap": 16.035821721964567,
+            "n": -1.3982030709595594,
+            "speed": 19.82153089651421,
+            "offset": -2.186666666666665,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.5,
+            "gap": 16.121271893370135,
+            "n": -1.7842502807983922,
+            "speed": 19.862423056666174,
+            "offset": -2.586666666666666,
+            "pass_seat": 1
+          },
+          {
+            "t": 8.0,
+            "gap": 16.188855507622492,
+            "n": -2.1766543356729455,
+            "speed": 19.894821057022728,
+            "offset": -2.986666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 8.5,
+            "gap": 16.24208964585324,
+            "n": -2.56876326065359,
+            "speed": 19.92044127084218,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 9.0,
+            "gap": 16.23030260292049,
+            "n": -2.860801553234982,
+            "speed": 20.696700098677983,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 9.5,
+            "gap": 14.869873786196223,
+            "n": -3.025118964620376,
+            "speed": 24.49670009867799,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 10.0,
+            "gap": 11.608465969483262,
+            "n": -3.1083441804121206,
+            "speed": 28.296700098678,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 10.5,
+            "gap": 6.44684514841623,
+            "n": -3.1507670737342757,
+            "speed": 32.096700098678006,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 11.0,
+            "gap": -0.6148237659986933,
+            "n": -3.172465740688523,
+            "speed": 35.89670009867796,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 11.5,
+            "gap": -9.57650327691411,
+            "n": -3.184382503175191,
+            "speed": 39.696700098677915,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 12.0,
+            "gap": -20.438114091684554,
+            "n": -3.1509734844655877,
+            "speed": 43.49670009867787,
+            "offset": -2.8800000000000003,
+            "pass_seat": null
+          },
+          {
+            "t": 12.5,
+            "gap": -33.198896316771425,
+            "n": -2.9504667250881536,
+            "speed": 47.296700098677825,
+            "offset": -2.4800000000000013,
+            "pass_seat": null
+          },
+          {
+            "t": 13.0,
+            "gap": -47.85885758144565,
+            "n": -2.6593319307516987,
+            "speed": 51.09670009867778,
+            "offset": -2.0800000000000023,
+            "pass_seat": null
+          },
+          {
+            "t": 13.5,
+            "gap": -64.41834319904683,
+            "n": -2.3176673089138298,
+            "speed": 54.896700098677734,
+            "offset": -1.6800000000000033,
+            "pass_seat": null
+          },
+          {
+            "t": 14.0,
+            "gap": -82.63822977122317,
+            "n": -1.9509906392752374,
+            "speed": 57.00980327500684,
+            "offset": -1.2800000000000042,
+            "pass_seat": null
+          },
+          {
+            "t": 14.5,
+            "gap": -101.44114664951644,
+            "n": -1.5674236264758619,
+            "speed": 58.16905680422868,
+            "offset": -0.8800000000000048,
+            "pass_seat": null
+          },
+          {
+            "t": 15.0,
+            "gap": -119.37097547641292,
+            "n": -1.183232473911498,
+            "speed": 53.0059339272392,
+            "offset": -0.48000000000000453,
+            "pass_seat": null
+          },
+          {
+            "t": 15.5,
+            "gap": -134.4112931374674,
+            "n": -0.7948262218820636,
+            "speed": 48.106598782564596,
+            "offset": -0.08000000000000443,
+            "pass_seat": null
+          },
+          {
+            "t": 16.0,
+            "gap": -147.84871953280015,
+            "n": -0.44278757638048694,
+            "speed": 46.09363342050897,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 16.5,
+            "gap": -160.6522787987588,
+            "n": -0.24635641335333883,
+            "speed": 45.29792472170106,
+            "offset": 0.0,
+            "pass_seat": null
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "half_width": 5.0
+      },
+      "result": {
+        "passed": true,
+        "returned": true,
+        "collision": false,
+        "max_n": 3.194216510569553,
+        "steps": 370,
+        "samples": [
+          {
+            "t": 0.0,
+            "gap": 35.0,
+            "n": 0.0,
+            "speed": 20.0,
+            "offset": -0.02666666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 0.5,
+            "gap": 33.98689440345508,
+            "n": -0.05599616709448246,
+            "speed": 23.800000000000008,
+            "offset": -0.4266666666666668,
+            "pass_seat": 1
+          },
+          {
+            "t": 1.0,
+            "gap": 31.570951123179956,
+            "n": -0.2739963805907491,
+            "speed": 25.197582823795056,
+            "offset": -0.8266666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 1.5,
+            "gap": 29.050846759293023,
+            "n": -0.5688028223348767,
+            "speed": 24.822043355002315,
+            "offset": -1.2266666666666661,
+            "pass_seat": 1
+          },
+          {
+            "t": 2.0,
+            "gap": 26.8166146883419,
+            "n": -0.9082068788922003,
+            "speed": 24.166519006285082,
+            "offset": -1.6266666666666652,
+            "pass_seat": 1
+          },
+          {
+            "t": 2.5,
+            "gap": 24.91473453728708,
+            "n": -1.2727562038133058,
+            "speed": 23.515346084376777,
+            "offset": -2.026666666666664,
+            "pass_seat": 1
+          },
+          {
+            "t": 3.0,
+            "gap": 23.322319311128226,
+            "n": -1.6515488117439046,
+            "speed": 22.93060179237801,
+            "offset": -2.426666666666665,
+            "pass_seat": 1
+          },
+          {
+            "t": 3.5,
+            "gap": 22.00226306354722,
+            "n": -2.038464550240599,
+            "speed": 22.422624759771786,
+            "offset": -2.8266666666666658,
+            "pass_seat": 1
+          },
+          {
+            "t": 4.0,
+            "gap": 20.91653781928177,
+            "n": -2.430075652949416,
+            "speed": 21.98867442511588,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 4.5,
+            "gap": 20.028001000003158,
+            "n": -2.7721617719943104,
+            "speed": 21.622219145045232,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.0,
+            "gap": 18.471598784508316,
+            "n": -2.9705884213265246,
+            "speed": 24.871348414513545,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.5,
+            "gap": 15.023019444833352,
+            "n": -3.0752722604861735,
+            "speed": 28.671348414513552,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.0,
+            "gap": 9.674120753184496,
+            "n": -3.131834942078578,
+            "speed": 32.47134841451356,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.5,
+            "gap": 2.4251418172923422,
+            "n": -3.1626030685565647,
+            "speed": 36.27134841451351,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.0,
+            "gap": -6.723850830074468,
+            "n": -3.186457575226526,
+            "speed": 40.071348414513466,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.5,
+            "gap": -17.772844561822353,
+            "n": -3.1833112363098706,
+            "speed": 43.87134841451342,
+            "offset": -2.986666666666667,
+            "pass_seat": null
+          },
+          {
+            "t": 8.0,
+            "gap": -30.721206834254332,
+            "n": -3.0162972126589103,
+            "speed": 47.671348414513375,
+            "offset": -2.586666666666666,
+            "pass_seat": null
+          },
+          {
+            "t": 8.5,
+            "gap": -45.568706365315705,
+            "n": -2.743055904881122,
+            "speed": 51.47134841451333,
+            "offset": -2.186666666666665,
+            "pass_seat": null
+          },
+          {
+            "t": 9.0,
+            "gap": -62.31566095593894,
+            "n": -2.4117034558266788,
+            "speed": 55.271348414513284,
+            "offset": -1.7866666666666655,
+            "pass_seat": null
+          },
+          {
+            "t": 9.5,
+            "gap": -80.82093258406775,
+            "n": -2.048918417479601,
+            "speed": 58.15325138085425,
+            "offset": -1.3866666666666665,
+            "pass_seat": null
+          },
+          {
+            "t": 10.0,
+            "gap": -100.22301869564603,
+            "n": -1.6696801525526583,
+            "speed": 59.21496889504407,
+            "offset": -0.9866666666666674,
+            "pass_seat": null
+          },
+          {
+            "t": 10.5,
+            "gap": -119.9168068381739,
+            "n": -1.2822381871848023,
+            "speed": 59.19153575270629,
+            "offset": -0.5866666666666676,
+            "pass_seat": null
+          },
+          {
+            "t": 11.0,
+            "gap": -139.48478873780857,
+            "n": -0.8883559280119291,
+            "speed": 59.41106256767852,
+            "offset": -0.18666666666666745,
+            "pass_seat": null
+          },
+          {
+            "t": 11.5,
+            "gap": -158.32100224253963,
+            "n": -0.5118379116150101,
+            "speed": 54.95819416493705,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 12.0,
+            "gap": -174.1894973473623,
+            "n": -0.285921981625783,
+            "speed": 49.23525045960515,
+            "offset": 0.0,
+            "pass_seat": null
+          }
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "curve": 0.0008
+      },
+      "result": {
+        "passed": true,
+        "returned": true,
+        "collision": false,
+        "max_n": 3.1857265283687832,
+        "steps": 370,
+        "samples": [
+          {
+            "t": 0.0,
+            "gap": 35.0,
+            "n": 0.0,
+            "speed": 20.0,
+            "offset": -0.02666666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 0.5,
+            "gap": 33.98709296941516,
+            "n": -0.06086099133731387,
+            "speed": 23.800000000000008,
+            "offset": -0.4266666666666668,
+            "pass_seat": 1
+          },
+          {
+            "t": 1.0,
+            "gap": 31.57271309392737,
+            "n": -0.276120698849104,
+            "speed": 25.197823915166428,
+            "offset": -0.8266666666666667,
+            "pass_seat": 1
+          },
+          {
+            "t": 1.5,
+            "gap": 29.056577508986436,
+            "n": -0.5700643958445911,
+            "speed": 24.82303606456244,
+            "offset": -1.2266666666666661,
+            "pass_seat": 1
+          },
+          {
+            "t": 2.0,
+            "gap": 26.828775856220425,
+            "n": -0.9089268064348809,
+            "speed": 24.16901626612888,
+            "offset": -1.6266666666666652,
+            "pass_seat": 1
+          },
+          {
+            "t": 2.5,
+            "gap": 24.93552701950152,
+            "n": -1.2731924665886434,
+            "speed": 23.520160331157825,
+            "offset": -2.026666666666664,
+            "pass_seat": 1
+          },
+          {
+            "t": 3.0,
+            "gap": 23.353555705703883,
+            "n": -1.651839410783765,
+            "speed": 22.938513047346717,
+            "offset": -2.426666666666665,
+            "pass_seat": 1
+          },
+          {
+            "t": 3.5,
+            "gap": 22.045352354248507,
+            "n": -2.038689477041249,
+            "speed": 22.434331198246525,
+            "offset": -2.8266666666666658,
+            "pass_seat": 1
+          },
+          {
+            "t": 4.0,
+            "gap": 20.972522260218426,
+            "n": -2.4302816153367117,
+            "speed": 22.004767615268488,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 4.5,
+            "gap": 20.097483331679612,
+            "n": -2.772332552470048,
+            "speed": 21.643167408332644,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.0,
+            "gap": 18.556963685851244,
+            "n": -2.970667739574072,
+            "speed": 24.89296821826711,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 5.5,
+            "gap": 15.130154632932943,
+            "n": -3.075313351028981,
+            "speed": 28.69296821826712,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.0,
+            "gap": 9.808552202923295,
+            "n": -3.131858575183126,
+            "speed": 32.49296821826712,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 6.5,
+            "gap": 2.592149632957529,
+            "n": -3.162617135156377,
+            "speed": 36.29296821826708,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.0,
+            "gap": -6.5191546162035365,
+            "n": -3.1794520047379993,
+            "speed": 40.09296821826703,
+            "offset": -3.1999999999999997,
+            "pass_seat": 1
+          },
+          {
+            "t": 7.5,
+            "gap": -17.40607367380798,
+            "n": -3.1760411190168845,
+            "speed": 43.07071736739608,
+            "offset": -2.986666666666667,
+            "pass_seat": null
+          },
+          {
+            "t": 8.0,
+            "gap": -29.23096598177503,
+            "n": -3.015924768061122,
+            "speed": 44.18564750103863,
+            "offset": -2.586666666666666,
+            "pass_seat": null
+          },
+          {
+            "t": 8.5,
+            "gap": -41.393444628419644,
+            "n": -2.7491756349917735,
+            "speed": 44.58174244865239,
+            "offset": -2.186666666666665,
+            "pass_seat": null
+          },
+          {
+            "t": 9.0,
+            "gap": -53.679414733271415,
+            "n": -2.422792774660479,
+            "speed": 44.72246086928793,
+            "offset": -1.7866666666666655,
+            "pass_seat": null
+          },
+          {
+            "t": 9.5,
+            "gap": -66.01330056978276,
+            "n": -2.063586458051811,
+            "speed": 44.77245310984907,
+            "offset": -1.3866666666666665,
+            "pass_seat": null
+          },
+          {
+            "t": 10.0,
+            "gap": -78.36850634292159,
+            "n": -1.6861975850589264,
+            "speed": 44.79021357152164,
+            "offset": -0.9866666666666674,
+            "pass_seat": null
+          },
+          {
+            "t": 10.5,
+            "gap": -90.7357245213264,
+            "n": -1.2987281878508985,
+            "speed": 44.79652323068639,
+            "offset": -0.5866666666666676,
+            "pass_seat": null
+          },
+          {
+            "t": 11.0,
+            "gap": -103.11172790068906,
+            "n": -0.9056718736196652,
+            "speed": 44.79876482775236,
+            "offset": -0.18666666666666745,
+            "pass_seat": null
+          },
+          {
+            "t": 11.5,
+            "gap": -115.49559510053757,
+            "n": -0.5225616343400703,
+            "speed": 44.799561187313934,
+            "offset": 0.0,
+            "pass_seat": null
+          },
+          {
+            "t": 12.0,
+            "gap": -127.88729306604279,
+            "n": -0.28977239048339337,
+            "speed": 44.79984410548907,
+            "offset": 0.0,
+            "pass_seat": null
+          }
+        ]
+      }
+    }
+  ]
+}

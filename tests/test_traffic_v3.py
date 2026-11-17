@@ -17,7 +17,7 @@ def load(path, name):
 
 
 v2 = load(ROOT/'baselines/v2/agent.py', 'v2_frozen')
-v3 = load(ROOT/'agent/agent.py', 'v3_current')
+v3 = load(ROOT/'baselines/v3/agent.py', 'v3_current')
 
 
 def observation():
@@ -215,7 +215,7 @@ class TrafficTests(unittest.TestCase):
 class FrozenParameterTests(unittest.TestCase):
     def test_non_traffic_planners_and_actuator_law_are_unchanged(self):
         old=ast.parse((ROOT/'baselines/v2/agent.py').read_text())
-        new=ast.parse((ROOT/'agent/agent.py').read_text())
+        new=ast.parse((ROOT/'baselines/v3/agent.py').read_text())
         for tree in (old,new):
             for node in ast.walk(tree):
                 for attr in ('lineno','col_offset','end_lineno','end_col_offset'):
@@ -230,7 +230,7 @@ class FrozenParameterTests(unittest.TestCase):
         self.assertEqual(v2.TRACK_PITS,v3.TRACK_PITS)
 
     def test_design_bytes_are_unchanged(self):
-        self.assertEqual((ROOT/'agent/design.json').read_bytes(),(ROOT/'baselines/v2/design.json').read_bytes())
+        self.assertEqual((ROOT/'baselines/v3/design.json').read_bytes(),(ROOT/'baselines/v2/design.json').read_bytes())
 
 
 if __name__=='__main__':unittest.main()

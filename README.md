@@ -1,40 +1,24 @@
 # AGX Racing local optimisation kit / 本地优化工具包
 
-## 本项目的 V3 迭代（2026-11-17）
+## 本项目的 V4 候选（2026-11-17）
 
-当前 `agent/` 是只修交通与超车的 V3 主版；`experiments/v3-corner/` 是独立弯道补油试验版。
-V3 主版保留 V2 的车辆设计、55 m/s 目标上限、抓地/制动预算、进站与油门控制公式。
-原始两文件在 `baselines/v1/`，已参赛 V2 在 `baselines/v2/`。
-本轮依据与验证见 [V3 修改理由](docs/V3修改理由.md)，
-三张地图的弯段与油门分析见 [弯道分析](docs/三赛道弯道与油门分析.md)。
-之前的 V1 分析保留于 [日志分析报告](docs/日志分析报告.md) 和 [V2 修改理由](docs/代码修改理由.md)。
+当前 `agent/` 为 V4：修复 Highland 急弯的弯度与转向错位，加入全圈制动规划、阻力/坡度补偿和滑动保护，适度提高缓弯及直线目标。车辆设计保持 V3 不变。
 
-运行回归测试：`python3 -m unittest discover -s tests -v`。
-当前车手不读取地图权重，可用标准库打包两文件：
+第19场实际问题与证据见 [第19场日志分析](docs/第19场日志分析.md)，实现理由、测试范围与局限见 [V4修改理由](docs/V4修改理由.md)。本地检查不能保证正式比赛完赛或提名次。
 
 ```sh
-python3 tools/build_submission.py --output submission-v3.zip --manifest submission-v3.manifest.json
+python -m unittest discover -s tests -v
+python tools/validate_v4.py /path/to/Formula --output analysis/v4-validation
+python tools/build_submission.py --output submission-v4.zip --manifest submission-v4.manifest.json
 ```
 
-独立试验版（先验证主版，再对照测试）：
+提交ZIP仍仅含 `agent.py`、`design.json`。公开地图曲率/坡度已嵌入代码，车手只用标准库；改公开地图后可用 `python tools/embed_v4_maps.py` 重新生成嵌入段。分析和旧工具使用NumPy。
 
-```sh
-python3 tools/build_corner_experiment.py
-python3 tools/build_submission.py --agent-dir experiments/v3-corner --output submission-v3-corner.zip --manifest submission-v3-corner.manifest.json
-```
+V1/V2/V3实参赛代码分别冻结在 `baselines/v1/`、`baselines/v2/`、`baselines/v3/`；独立V3弯道试验版保留在 `experiments/v3-corner/`。历史说明见 [V3修改理由](docs/V3修改理由.md)、[三赛道弯道分析](docs/三赛道弯道与油门分析.md)、[V1日志报告](docs/日志分析报告.md)、[V2修改理由](docs/代码修改理由.md)。
 
-历史输入和简化交通反馈检查：
+重新构建历史V3主版请显式使用 `--agent-dir baselines/v3`；`tools/validate_v3.py` 和 `tools/build_corner_experiment.py` 也明确读取冻结V3。不要把历史验证结果当作当前V4结果。
 
-```sh
-python3 tools/validate_v3.py /Users/syeah/Downloads/Formula --max-folder 18 --output analysis/v3-validation
-python3 tools/analyze_corners.py /Users/syeah/Downloads/Formula --output analysis/v3-corners
-```
-
-原始本人日志保留在本地，不提交到 GitHub 或赛车 ZIP。以下保留原工具包说明；
-其中 `sim/` 是近似模型，运行它不会自动修改当前车手。
-
-赛车策略保留 PPT 原版。
-The racing policy is the original PPT example.
+原始本人日志保留在本地，不提交到GitHub或赛车ZIP。以下是原工具包说明，涉及“原版策略”的描述只对应历史starter；`sim/` 是近似模型，运行它不会自动修改车手。
 
 这是地图、最小策略和自建近似环境的示例。模型结果与正式对局有偏差。所有动力学/判定参数都要用本人的日志标定。
 These are map parts, a minimal policy and examples for YOUR approximate environment. Model results differ from matches. Fit all dynamics/adjudication parameters using your own logs.

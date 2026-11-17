@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def build():
-    source = (ROOT/'agent/agent.py').read_text()
+    source = (ROOT/'baselines/v3/agent.py').read_text()
     helper = (ROOT/'experiments/corner_support.py').read_text()
     anchor = '\n\nclass Driver:'
     assert source.count(anchor) == 1
@@ -29,7 +29,7 @@ def build():
     folder = ROOT/'experiments/v3-corner'
     folder.mkdir(parents=True, exist_ok=True)
     (folder/'agent.py').write_text('# V3 CORNER EXPERIMENT: test separately from the traffic-only main build.\n'+source)
-    (folder/'design.json').write_bytes((ROOT/'agent/design.json').read_bytes())
+    (folder/'design.json').write_bytes((ROOT/'baselines/v3/design.json').read_bytes())
     print(folder)
 
 

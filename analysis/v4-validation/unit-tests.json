@@ -1,0 +1,8 @@
+{
+  "tests": 88,
+  "passed": 88,
+  "errors": 0,
+  "failures": 0,
+  "source_sha256": "b888ee5e2f379cfa0993261a374812e265ab525aebeb961a22d4e33d76750255",
+  "method": "64 frozen historical regressions and 24 current V4 tests; parameterized feedback scenarios inside tests. Not official AGX races."
+}

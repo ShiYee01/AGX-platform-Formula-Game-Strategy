@@ -33,7 +33,7 @@ def validate(logs,output,max_folder):
     output.mkdir(parents=True,exist_ok=True)
     v1=load(ROOT/'baselines/v1/agent.py','recorded_v1')
     v2=load(ROOT/'baselines/v2/agent.py','recorded_v2')
-    v3=load(ROOT/'agent/agent.py','main_v3')
+    v3=load(ROOT/'baselines/v3/agent.py','main_v3')
     exp=load(ROOT/'experiments/v3-corner/agent.py','corner_v3')
     records=[];corner_counts=defaultdict(Counter)
     for folder in sorted((p for p in logs.iterdir() if p.is_dir() and p.name.isdigit() and int(p.name)<=max_folder),key=lambda p:int(p.name)):
@@ -94,7 +94,7 @@ def validate(logs,output,max_folder):
     (output/'feedback-scenarios.json').write_text(json.dumps(dict(
         method='Chosen toy bicycle/traffic assumptions; not official dynamics or race-time evidence.',
         scenarios=scenarios),ensure_ascii=False,indent=2)+'\n')
-    paths={'v2':'baselines/v2/agent.py','v3':'agent/agent.py','corner':'experiments/v3-corner/agent.py'}
+    paths={'v2':'baselines/v2/agent.py','v3':'baselines/v3/agent.py','corner':'experiments/v3-corner/agent.py'}
     result=dict(method='Recorded input replay, immutable-parameter checks, and declared toy traffic feedback. No official engine or ranking prediction.',
                 source_sha256={k:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for k,p in paths.items()},
                 total_decisions=sum(r['decisions'] for r in records),matches=records,
