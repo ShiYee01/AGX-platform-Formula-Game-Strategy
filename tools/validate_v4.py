@@ -16,7 +16,7 @@ def load(path,name):
 
 def validate(logs,output):
     output.mkdir(parents=True,exist_ok=True)
-    v4=load(ROOT/'agent/agent.py','v4_validate')
+    v4=load(ROOT/'baselines/v4/agent.py','v4_validate')
     v3=load(ROOT/'baselines/v3/agent.py','v3_validate')
     contract=load(ROOT/'tools/validate_v3.py','action_contract')
     records=[]
@@ -61,7 +61,7 @@ def validate(logs,output):
         assert r['passed'] and r['returned'] and not r['collision']
         traffic_scenarios.append(dict(parameters=kw,result=r))
     result=dict(method='Recorded input action contracts and complete export hashes. These are not trajectories produced by the candidate, race results, or proof of finishing.',
-      source_sha256=hashlib.sha256((ROOT/'agent/agent.py').read_bytes()).hexdigest(),
+      source_sha256=hashlib.sha256((ROOT/'baselines/v4/agent.py').read_bytes()).hexdigest(),
       design_sha256=hashlib.sha256((ROOT/'agent/design.json').read_bytes()).hexdigest(),
       total_decisions=sum(r['decisions'] for r in records),matches=records,
       feedback_model='Chosen force curves, tyre limits and delays with a 3.4m bicycle approximation. No rivals, damage accumulation, tyres, energy or pit engine; scenario times are not official lap predictions.',

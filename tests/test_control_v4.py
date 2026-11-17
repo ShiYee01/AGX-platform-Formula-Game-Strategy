@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def load(path,name):
     s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 
-v4=load(ROOT/'agent/agent.py','control_v4')
+v4=load(ROOT/'baselines/v4/agent.py','control_v4')
 v3=load(ROOT/'baselines/v3/agent.py','control_v3')
 feedback=load(ROOT/'tools/feedback_v4.py','feedback_v4_tests')
 traffic=load(ROOT/'tests/test_traffic_v3.py','traffic_fixture_v4')

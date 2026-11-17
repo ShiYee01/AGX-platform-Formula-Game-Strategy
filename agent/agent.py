@@ -1,4 +1,4 @@
-"""V4 candidate: map-aligned corner control and traction-aware acceleration.
+"""V5 candidate: stable straight/exit acceleration and anticipatory lapping clearance.
 
 Uses public current observations and this seat's memory. No SDK/weights needed.
 Platform races are still required to establish a performance improvement.
@@ -135,7 +135,7 @@ def steer_command(o, offset, state):
     return clip((math.atan(3.4 * k) - .90 * angle(c['heading_error']) - cross) / .30, -1.0, 1.0)
 
 
-def pedals(o, target, feed_accel, state, mode):
+def pedals(o, target, feed_accel, state, mode, allow_extra=False, offset=0.0):
     c = o['self'];error = target - c['speed_mps']
     force = c.get('drive_force_n', [])
     mass = c.get('effective_mass_kg', 0.0)
@@ -149,6 +149,21 @@ def pedals(o, target, feed_accel, state, mode):
     lateral = max(abs(c.get('g_lat', 0.0)) * 9.81, c['speed_mps'] ** 2 * abs(curve))
     utilization = lateral / max(.1, lateral_budget(curve) * grip)
     accel_cap = 5.0 * grip * math.sqrt(max(0.0, 1.0 - min(1.0, utilization) ** 2))
+    # Extra propulsion is a conditional release of the V4 cap, not a faster
+    # corner target. High lateral load and every unstable state retain V4.
+    if (allow_extra and state is not None and error > .5
+            and abs(angle(c['heading_error'])) < .10
+            and abs(c['n'] - offset) < .75
+            and abs(c['n']) < min(o['preview']['rows'][0][3:5]) - 1.7
+            and c['fuel_kg'] >= 5.0
+            and not c.get('front_sliding', True) and not c.get('rear_sliding', True)):
+        release = clip((.85 - utilization) / .45, 0.0, 1.0)
+        remaining = math.sqrt(max(0.0, 1.0 - min(1.0, utilization) ** 2))
+        candidate = (5.0 + 5.0 * release) * grip * remaining
+        # Budget wheel force as well as net acceleration, so drag/uphill
+        # compensation cannot silently spend the whole traction reserve.
+        wheel_budget = 11.0 * grip * remaining - max(0.0, resistance) / mass
+        accel_cap = max(accel_cap, min(candidate, wheel_budget))
     if c.get('rear_sliding', False) or c.get('front_sliding', False):
         accel_cap = min(accel_cap, .8 * grip)
     accel = clip(1.6 * error + feed_accel, -8.0 * grip, accel_cap)
@@ -165,6 +180,16 @@ def pedals(o, target, feed_accel, state, mode):
         throttle = 0.0
         brake = max(brake, clip(-error * .04, 0.0, .35))
     return throttle, brake
+
+
+def is_lapping_rival(o, rival):
+    if 'lap' not in rival:
+        return False
+    c = o['self'];length = o['track_length_m']
+    # Lap counters alone are ambiguous when one car has just crossed start.
+    station = (c['s'] + rival['gap_m']) % length
+    progress_ahead = (rival['lap'] - c['lap']) * length + station - c['s']
+    return progress_ahead > .5 * length
 
 
 def pit_entry_distance(o):
@@ -188,6 +213,13 @@ class Driver:
         self.pass_goal = 0.0
         self.pass_seen_time = None
         self.diagnostic = {}
+        self.last_unstable_time = None
+        self.yield_seat = None
+        self.yield_goal = 0.0
+        self.yield_seen = self.yield_started = None
+        self.yield_state = None
+        self.yield_near = False
+        self.rival_motion = {}
 
     def reset_phase(self, o):
         c = o['self']
@@ -198,6 +230,13 @@ class Driver:
         self.wet_race, self.compounds = False, set()
         self.pass_seat, self.pass_goal = None, 0.0
         self.pass_seen_time = None
+        self.last_unstable_time = o['time']
+        self.yield_seat = None
+        self.yield_goal = self.offset
+        self.yield_seen = self.yield_started = None
+        self.yield_state = None
+        self.yield_near = False
+        self.rival_motion = {}
 
     def choose_pit(self, o):
         c = o['self']
@@ -237,6 +276,121 @@ class Driver:
                 return False
         return True
 
+    def observe_rivals(self, o, rivals):
+        for r in rivals:
+            lane = o['self']['n'] + r['dn']
+            previous = self.rival_motion.get(r['seat'])
+            rate = 0.0
+            first_seen = o['time']
+            if previous is not None:
+                dt = o['time'] - previous[0]
+                if 0.0 < dt < .5:
+                    first_seen = previous[3] if len(previous) > 3 else previous[0]
+                    measured = clip((lane - previous[1]) / dt, -2.0, 2.0)
+                    rate = .75 * previous[2] + .25 * measured
+            self.rival_motion[r['seat']] = (o['time'], lane, rate, first_seen)
+        self.rival_motion = {seat: value for seat, value in self.rival_motion.items()
+                             if o['time'] - value[0] <= 2.0}
+
+    def clear_yield_sweep(self, o, goal, rivals):
+        if not self.clear_sweep(o, goal, rivals):
+            return False
+        c = o['self']
+        duration = abs(goal - c['n']) / .8 + .75
+        low, high = sorted((c['n'], goal))
+        for r in rivals:
+            gap = r['gap_m']
+            future_gap = gap + (r['speed_mps'] - c['speed_mps']) * duration
+            if min(gap, future_gap) >= 9.0 or max(gap, future_gap) <= -9.0:
+                continue
+            lane = c['n'] + r['dn']
+            rate = self.rival_motion.get(r['seat'], (0., 0., 0.))[2]
+            future_lane = lane + clip(rate * duration, -1.0, 1.0)
+            if (min(lane, future_lane) < high + TRAFFIC_CLEARANCE
+                    and max(lane, future_lane) > low - TRAFFIC_CLEARANCE):
+                return False
+        return True
+
+    def lapping_plan(self, o, rivals, launching):
+        c = o['self']
+        self.yield_near = False
+        if launching or c['pit_state']:
+            self.yield_seat = self.yield_state = None
+            return None
+        leader = next((r for r in rivals if r['seat'] == self.yield_seat), None)
+        if self.yield_seat is not None:
+            if leader is None:
+                if self.yield_seen is not None and o['time'] - self.yield_seen <= 2.0:
+                    self.yield_state = 'lost_hold'
+                    return self.yield_goal
+                self.yield_seat = self.yield_state = None
+            elif (not is_lapping_rival(o, leader)
+                    or leader['gap_m'] >= 20.0 or leader['gap_m'] < -400.0
+                    or (o['time'] - self.yield_started > 20.0
+                        and leader['gap_m'] < -60.0
+                        and leader['speed_mps'] - c['speed_mps'] <= 1.0)):
+                self.yield_seat = self.yield_state = None
+                leader = None
+        if self.yield_seat is None:
+            candidates = []
+            for r in rivals:
+                closing = r['speed_mps'] - c['speed_mps']
+                if (is_lapping_rival(o, r) and -400.0 < r['gap_m'] < 0.0
+                        and closing > 2.0):
+                    ttc = -r['gap_m'] / closing
+                    if ttc < 14.0:
+                        candidates.append((ttc, r['seat'], r))
+            if not candidates:
+                return None
+            leader = min(candidates, key=lambda x: (x[0], x[1]))[2]
+            self.yield_seat = leader['seat']
+            self.yield_goal = self.offset
+            self.yield_started = o['time']
+            self.yield_state = 'watch'
+        self.yield_seen = o['time']
+        gap = leader['gap_m']
+        closing = leader['speed_mps'] - c['speed_mps']
+        ttc = -gap / closing if closing > .5 and gap < 0.0 else float('inf')
+        lane = c['n'] + leader['dn']
+        self.yield_near = -30.0 < gap < 20.0
+        if self.yield_state in ('move', 'hold', 'lost_hold'):
+            self.yield_state = 'hold' if abs(c['n'] - self.yield_goal) < .6 else 'move'
+            return self.yield_goal
+        # When lanes already clear, preserve that clearance instead of moving
+        # unpredictably in front of a fast car. A late threat also means hold.
+        if abs(lane - c['n']) >= TRAFFIC_CLEARANCE or ttc < 3.0 or gap >= -15.0:
+            self.yield_state = 'hold'
+            return self.yield_goal
+        motion = self.rival_motion.get(leader['seat'])
+        if motion is None or o['time'] - motion[3] < .25:
+            return self.yield_goal  # Observe motion before choosing a side.
+        state = map_state(o)
+        if (state is None or abs(angle(c['heading_error'])) > .10
+                or c.get('front_sliding', True) or c.get('rear_sliding', True)
+                or abs(interpolate(state[1], c['s'], state[0])) >= .002):
+            return self.yield_goal
+        rate = self.rival_motion.get(leader['seat'], (0., 0., 0.))[2]
+        projected_lane = lane + clip(rate * min(ttc, 5.0), -1.0, 1.0)
+        spacing = TRAFFIC_CLEARANCE + PASS_LANE_MARGIN
+        options = (min(lane, projected_lane) - spacing,
+                   max(lane, projected_lane) + spacing)
+        for goal in sorted(options, key=lambda n: abs(n - c['n'])):
+            duration = abs(goal - c['n']) / .8 + .75
+            if ttc <= duration + 1.0:
+                continue
+            distance = max(30.0, c['speed_mps'] * (duration + .5))
+            rows = [r for r in o['preview']['rows'] if r[0] <= distance + 15.0]
+            if (distance > o['preview']['rows'][-1][0] - 15.0
+                    or max(abs(r[1]) for r in rows) >= .002):
+                continue
+            low = -max(0.0, min(r[4] for r in rows) - 1.5)
+            high = max(0.0, min(r[3] for r in rows) - 1.5)
+            if low <= goal <= high and self.clear_yield_sweep(o, goal, rivals):
+                self.yield_goal = goal
+                self.yield_state = 'move'
+                break
+        return self.yield_goal
+
     def traffic_plan(self, o, target, dt):
         c = o['self']
         if o['phase'] != 'race':
@@ -250,6 +404,8 @@ class Driver:
         blend = blend * blend * (3.0 - 2.0 * blend)
         goal = clip(self.grid_n * (1.0 - blend), low, high)
         launching = progress < 380.0
+        self.observe_rivals(o, rivals)
+        yield_goal = self.lapping_plan(o, rivals, launching)
         leaders = [r for r in rivals if 0.0 < r['gap_m'] < max(65.0, 2.5 * c['speed_mps'])
                    and abs(c['n'] + r['dn'] - self.offset) < TRAFFIC_CLEARANCE]
         front = min(leaders, key=lambda r: r['gap_m'], default=None)
@@ -260,7 +416,11 @@ class Driver:
         holding_lost_target = (self.pass_seat is not None and passing is None
                                and self.pass_seen_time is not None
                                and o['time'] - self.pass_seen_time <= PASS_LOST_HOLD_S)
-        if (passing is not None and -12.0 < passing['gap_m'] < 65.0) or holding_lost_target:
+        if yield_goal is not None:
+            goal = clip(yield_goal, low, high)
+            self.pass_seat = None
+            self.pass_seen_time = None
+        elif (passing is not None and -12.0 < passing['gap_m'] < 65.0) or holding_lost_target:
             # Hold the side through a bend or a brief visibility gap. Returning
             # to centre waits for clearance. Abandon a target pulling far away;
             # the same sweep guard still blocks an unsafe return merge.
@@ -280,7 +440,9 @@ class Driver:
                         self.pass_seat = front['seat']
                         self.pass_seen_time = o['time']
                         break
-        if abs(goal - self.offset) > 0.05 and not self.clear_sweep(o, goal, rivals):
+        sweep_clear = (self.clear_yield_sweep(o, goal, rivals) if yield_goal is not None
+                       else self.clear_sweep(o, goal, rivals))
+        if abs(goal - self.offset) > 0.05 and not sweep_clear:
             goal = self.offset  # Hold lane instead of merging into a car.
         self.offset = clip(self.offset + clip(goal - self.offset, -0.8 * dt, 0.8 * dt), low, high)
         for r in rivals:
@@ -297,6 +459,13 @@ class Driver:
             stop_cap = math.sqrt(max(0.0, r['speed_mps'] ** 2
                             + 2.0 * braking * max(0.0, r['gap_m'] - 5.0)))
             target = min(target, follow, stop_cap)
+        # Once safely to the side, stop accelerating during the close pass.
+        # This requests the current speed, never an extra braking step.
+        leader = next((r for r in rivals if r['seat'] == self.yield_seat), None)
+        if (leader is not None and self.yield_near
+                and abs(c['n'] - self.yield_goal) < .6
+                and abs(leader['dn']) >= TRAFFIC_CLEARANCE):
+            target = min(target, c['speed_mps'])
         return target, self.offset
 
     def act(self, o):
@@ -325,7 +494,14 @@ class Driver:
         boost = (straight and stable and (o['phase'] != 'race' or elapsed >= 6.0)
                  and (error > .5 or feed_accel > 1.0) and c['ers_soc_mj'] > 1.5)
         mode = 2 if boost else 1
-        throttle, brake = pedals(o, target, feed_accel, state, mode)
+        if (not stable or state is None):
+            self.last_unstable_time = o['time']
+        recovery_done = (self.last_unstable_time is not None
+                         and o['time'] - self.last_unstable_time >= .75)
+        allow_extra = (stable and recovery_done and target >= road_target - .1
+                       and (o['phase'] != 'race' or elapsed >= 6.0))
+        throttle, brake = pedals(o, target, feed_accel, state, mode,
+                                 allow_extra=allow_extra, offset=offset)
         if abs(heading) > .60:
             throttle = min(throttle, .20)
         if c['fuel_kg'] < 5.0:
@@ -338,13 +514,16 @@ class Driver:
             throttle, brake, steer, boost = 0.0, 0.0, 0.0, False
             self.last_steer = 0.0
         self.diagnostic = dict(target=target, offset=offset, wet_race=self.wet_race,
-                               road_target=road_target, feed_accel=feed_accel, map_valid=state is not None)
+                               road_target=road_target, feed_accel=feed_accel, map_valid=state is not None,
+                               extra_accel_enabled=allow_extra,
+                               yield_seat=self.yield_seat, yield_state=self.yield_state,
+                               yield_goal=self.yield_goal)
         return dict(throttle=throttle, brake=brake, steer=steer,
                     ers_mode=2 if boost else 1, aero_mode=0,
                     pit_request=bool(pit), pit_compound=compound)
 
 
-# BEGIN PUBLIC MAP DATA (generated by tools/embed_v4_maps.py; curvature 1/m, grade m/m)
+# BEGIN PUBLIC MAP DATA (generated by tools/embed_maps.py; curvature 1/m, grade m/m)
 MAP_DATA = (
     # parkland: 2898 uniform samples; public map SHA256 e6bcbac9c86b8ebd01d37a5daa1b6984048472eb8bff842fc953e0032aa2ecc8
     (5795.843091436305,

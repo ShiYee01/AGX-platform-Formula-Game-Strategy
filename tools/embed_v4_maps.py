@@ -24,7 +24,7 @@ def generated():
 
 
 def build():
-    p=ROOT/'agent/agent.py';s=p.read_text();a=s.index(START);b=s.index(END,a)+len(END)
+    p=ROOT/'baselines/v4/agent.py';s=p.read_text();a=s.index(START);b=s.index(END,a)+len(END)
     s=s[:a]+generated()+s[b:]
     assert len(s.encode())<256*1024
     p.write_text(s)

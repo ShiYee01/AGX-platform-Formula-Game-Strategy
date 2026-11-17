@@ -8,10 +8,10 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 def load(path,name):
  sp=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m);return m
-v3=load(R/'baselines/v3/agent.py','v3');v4=load(R/'agent/agent.py','v4')
+v3=load(R/'baselines/v3/agent.py','v3');v4=load(R/'baselines/v4/agent.py','v4')
 
 def scenario(mod,track='highland',wet=.56,start=None,end=None,v0=30,lateral=12,lag=.12,lane=0):
- d=json.load(open(R/f'data/racing-{track}.mapdata.json'));pts=d['centerline'];length=d['length_m'];N=len(pts)
+ d=json.loads((R/f'data/racing-{track}.mapdata.json').read_text());pts=d['centerline'];length=d['length_m'];N=len(pts)
  def at(key,s):
   q=(s%length)*N/length;i=int(q);return pts[i][key]+(pts[(i+1)%N][key]-pts[i][key])*(q-i)
  if start is None:
