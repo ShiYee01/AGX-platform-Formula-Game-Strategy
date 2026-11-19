@@ -8,3 +8,4 @@ logs/
 submission*.zip
 fitted*.json
 profile*.npz
+replays/
