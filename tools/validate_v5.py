@@ -13,7 +13,7 @@ def load(path,name):
 def validate(logs,output):
     output.mkdir(parents=True,exist_ok=True)
     v4=load(ROOT/'baselines/v4/agent.py','v4_validator')
-    v5=load(ROOT/'agent/agent.py','v5_validator')
+    v5=load(ROOT/'baselines/v5/agent.py','v5_validator')
     contract=load(ROOT/'tools/validate_v3.py','v5_contract')
     assert v5.MAP_DATA==v4.MAP_DATA
     records=[];focus=[]
@@ -96,9 +96,9 @@ def validate(logs,output):
     for kw in ({},{'half_width':5.},{'initial_gap':8.,'seconds':60.},{'curve':.0008}):
         r=traffic.traffic_scenario(v5,**kw);assert not r['collision'] and r['passed'] and r['returned'];normal.append(dict(parameters=kw,result=r))
     result=dict(method='Original owner-input replay and action contracts, not V5 race trajectories. Feedback models use declared assumptions and cannot prove official finishing or rank improvement.',
-                source_sha256=hashlib.sha256((ROOT/'agent/agent.py').read_bytes()).hexdigest(),
+                source_sha256=hashlib.sha256((ROOT/'baselines/v5/agent.py').read_bytes()).hexdigest(),
                 baseline_v4_sha256=hashlib.sha256((ROOT/'baselines/v4/agent.py').read_bytes()).hexdigest(),
-                design_sha256=hashlib.sha256((ROOT/'agent/design.json').read_bytes()).hexdigest(),
+                design_sha256=hashlib.sha256((ROOT/'baselines/v5/design.json').read_bytes()).hexdigest(),
                 total_decisions=sum(r['decisions'] for r in records),matches=records,
                 full_map_sensitivity=corners,tight_corner_delay_sensitivity=delay,
                 acceleration_sensitivity=acceleration,lapping_scenarios=lapping,normal_passing=normal)

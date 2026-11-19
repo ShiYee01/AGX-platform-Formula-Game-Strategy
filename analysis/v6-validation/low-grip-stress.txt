@@ -1,0 +1,14 @@
+Stress: model grip BELOW the V6 plan (model lat 15 or 13 m/s^2, brake 14, steering lag 0.20 s, wet loss 0.45 in the model).
+V6 parkland  wet 0.0 model_lat 15.0 lap 113.6 max|n| 0.78 margin 5.62 slide 0.068 on_road True
+V6 parkland  wet 0.0 model_lat 13.0 lap 119.1 max|n| 5.62 margin 0.68 slide 0.132 on_road True
+V6 parkland  wet 1.0 model_lat 15.0 lap 153.3 max|n| 0.47 margin 5.99 slide 0.039 on_road True
+V6 parkland  wet 1.0 model_lat 13.0 lap 161.6 max|n| 5.64 margin 0.73 slide 0.096 on_road True
+V6 highland  wet 0.0 model_lat 15.0 lap 152.1 max|n| 2.46 margin 4.27 slide 0.068 on_road True
+V6 highland  wet 0.0 model_lat 13.0 lap 159.5 max|n| 1.41 margin 4.96 slide 0.095 on_road True
+V6 highland  wet 1.0 model_lat 15.0 lap 209.1 max|n| 0.29 margin 5.82 slide 0.022 on_road True
+V6 highland  wet 1.0 model_lat 13.0 lap 220.5 max|n| 2.13 margin 3.87 slide 0.082 on_road True
+V6 crossover wet 0.0 model_lat 15.0 lap 133.9 max|n| 5.01 margin 0.97 slide 0.066 on_road True
+V6 crossover wet 0.0 model_lat 13.0 lap None max|n| 6.02 margin -0.11 slide 0.180 on_road False
+V6 crossover wet 1.0 model_lat 15.0 lap 182.0 max|n| 0.24 margin 4.84 slide 0.015 on_road True
+V6 crossover wet 1.0 model_lat 13.0 lap 191.6 max|n| 3.58 margin 2.39 slide 0.077 on_road True
+on road 11 / 12

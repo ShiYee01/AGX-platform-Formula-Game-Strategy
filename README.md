@@ -1,22 +1,23 @@
 # AGX Racing local optimisation kit / 本地优化工具包
 
-## 本项目的 V5 候选（2026-11-18）
+## 本项目的 V6 候选（2026-11-19）
 
-当前 `agent/` 为 V5：保留V4地图、转向、道路限速与失控保护，重点改善稳定直道/出弯加速，并新增提前识别套圈快车、安全让道与并回逻辑。车辆设计与V4完全一致。
+当前 `agent/` 为 V6：在V5控制结构上，把过弯、制动、加速和最高速度预算提高到公开回放实测上限的约70%；稳定直道全油门；湿地更保守；新增按滑动自动降低的在线抓地信任。车辆设计不变。
 
-改动依据、保留项、测试范围与局限见 [V5修改理由](docs/V5修改理由.md)。本地检查不是正式圈速或完赛证明。
+改动依据、测试和局限见 [V6修改理由](docs/V6修改理由.md)；V5实战诊断见 [V5实战复盘与改进方案](docs/V5实战复盘与改进方案.md)。本地检查不是正式圈速或完赛证明。
 
 ```sh
 python -m unittest discover -s tests -v
-python tools/validate_v5.py /path/to/Formula --output analysis/v5-validation
-python tools/build_submission.py --output submission-v5.zip --manifest submission-v5.manifest.json
+python tools/feedback_v6.py baselines/v5/agent.py agent/agent.py     # 回放标定的整圈模型（不是平台引擎）
+python tools/replay_analysis.py summary --out replays --me <显示名>   # 公开回放对比（先运行 history/download）
+python tools/build_submission.py --output submission-v6.zip --manifest submission-v6.manifest.json
 ```
 
 ZIP仅含 `agent.py`、`design.json`，公开地图曲率/坡度已嵌入代码，车手只用标准库。当前嵌入段生成器为 `python tools/embed_maps.py`；分析与部分历史测试使用NumPy。
 
-实际参赛V1–V4分别保存在 `baselines/v1/` 至 `baselines/v4/`；V3独立试验版保留在 `experiments/v3-corner/`。历史检查明确读取对应冻结基线，避免把当前车手误认成旧版。重新打包旧版可用 `--agent-dir baselines/v4` 等参数。
+实际参赛V1–V5分别保存在 `baselines/v1/` 至 `baselines/v5/`；V3独立试验版保留在 `experiments/v3-corner/`。历史检查明确读取对应冻结基线，避免把当前车手误认成旧版。重新打包旧版可用 `--agent-dir baselines/v5` 等参数。
 
-历史文档：[V4修改理由](docs/V4修改理由.md)、[第19场V3日志分析](docs/第19场日志分析.md)、[V3修改理由](docs/V3修改理由.md)、[三赛道弯道分析](docs/三赛道弯道与油门分析.md)、[V1日志报告](docs/日志分析报告.md)。
+历史文档：[V5修改理由](docs/V5修改理由.md)、[V4修改理由](docs/V4修改理由.md)、[第19场V3日志分析](docs/第19场日志分析.md)、[V3修改理由](docs/V3修改理由.md)、[三赛道弯道分析](docs/三赛道弯道与油门分析.md)、[V1日志报告](docs/日志分析报告.md)。
 
 原始本人日志保留在本地，不提交到GitHub或赛车ZIP。以下是原工具包说明，涉及“原版策略”的描述只对应历史starter；`sim/` 是近似模型，运行它不会自动修改车手。
 
