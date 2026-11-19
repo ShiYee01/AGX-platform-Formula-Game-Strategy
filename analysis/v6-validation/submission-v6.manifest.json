@@ -1,0 +1,16 @@
+{
+  "zip": "submission-v6.zip",
+  "zip_bytes": 65251,
+  "zip_sha256": "37eae42f1e81bc8c707c8e6f5db9231483edae09bc9b2f3f7c417e9b5679a83a",
+  "files": {
+    "agent.py": {
+      "bytes": 211954,
+      "sha256": "d1640a8ce16bea35a69f1670caff110f5ceffefe3401f98dd4feaaa6b2c7614b"
+    },
+    "design.json": {
+      "bytes": 824,
+      "sha256": "8b6eea2a9a577dbbfbcf70de7453fb4e1d74b89b377dc97db3b9ca0389444059"
+    }
+  },
+  "validation": "Local syntax, JSON, size, archive CRC and byte equality only; platform admission pending."
+}

@@ -1,4 +1,5 @@
-"""V5 candidate: stable straight/exit acceleration and anticipatory lapping clearance.
+"""V6 candidate: V5 control structure with grip, braking and power budgets
+raised to about 70% of the limits measured from public replays of all cars.
 
 Uses public current observations and this seat's memory. No SDK/weights needed.
 Platform races are still required to establish a performance improvement.
@@ -9,9 +10,18 @@ import math
 TRACK_PITS = ((5795.843091436305, 5715.9313949727275),
               (6999.367280545016, 6609.507079216389),
               (5803.166698722436, 5355.31315011008))
-TOP_SPEED = 60.0  # 216 km/h candidate cap, subject to the full braking profile.
-BRAKING_BUDGET = 5.5  # Chosen conservative m/s^2 before wet/wear scaling.
+# Public replays (21 races, all cars): dry |g_lat| ~2.5 g, braking ~2.6-3.0 g,
+# top speed ~92 m/s; full wet scales grip by ~0.56, matching grip_budget().
+# V6 plans at roughly 70% of those limits. These are chosen budgets, not
+# official physics constants.
+TOP_SPEED = 90.0  # 324 km/h candidate cap, subject to the full braking profile.
+BRAKING_BUDGET = 14.0  # Chosen m/s^2 before wet/wear scaling (V5: 5.5).
+ACCEL_BUDGET = 12.0  # Chosen traction-limited m/s^2 before scaling (V5: 5).
+FALLBACK_BRAKING = 5.5  # Unknown map: keep the conservative V5 preview path.
 _PROFILES = {}
+# Online grip trust in [GRIP_SCALE_MIN, 1]; lowered by observed sliding.
+GRIP_SCALE_MIN = 0.70
+_GRIP_SCALE = [1.0]
 
 # Traffic geometry only: a chosen lane must clear the existing 2.8 m guard.
 TRAFFIC_CLEARANCE = 2.8
@@ -27,9 +37,15 @@ def angle(value):
     return math.atan2(math.sin(value), math.cos(value))
 
 
+# V5 used 0.45. Replays: in heavy rain (wetness >= 0.75) no clean lap reached
+# the 0.45-scaled V6 speed in about half of the Highland/Crossover bends, so V6
+# trusts less wet grip. Dry pace is unaffected.
+WET_GRIP_LOSS = 0.55
+
+
 def grip_budget(o):
-    return ((1.0 - 0.45 * clip(o['weather']['track_wetness'], 0.0, 1.0))
-            * max(0.65, 1.0 - 0.4 * max(o['self']['tyre_wear'])))
+    return ((1.0 - WET_GRIP_LOSS * clip(o['weather']['track_wetness'], 0.0, 1.0))
+            * max(0.65, 1.0 - 0.4 * max(o['self']['tyre_wear'])) * _GRIP_SCALE[0])
 
 
 def interpolate(values, station, length):
@@ -39,10 +55,10 @@ def interpolate(values, station, length):
 
 
 def lateral_budget(curve):
-    # Candidate budgets, not identified tyre limits. Preserve the tight-bend
-    # budget; allow modest extra pace only in broad bends.
-    k = abs(curve)
-    return 10.0 if k > 0.02 else (11.0 if k > 0.005 else 12.0)
+    # Candidate budgets, about 70% of the replay envelope (~24.5 m/s^2).
+    # Hairpins (radius < 20 m) keep a smaller budget: they are the bends
+    # where V3 lost the car and the measured gap to the winners is smallest.
+    return 13.0 if abs(curve) > 0.05 else 17.0
 
 
 def map_state(o):
@@ -89,14 +105,14 @@ def road_plan(o, offset=0.0, state=None):
         target2 = squared(c['s'])
         target = math.sqrt(target2)
         feed_accel = clip((squared(c['s'] + 4.0) - target2) / 8.0,
-                          -BRAKING_BUDGET * grip, 5.0 * grip)
+                          -BRAKING_BUDGET * grip, ACCEL_BUDGET * grip)
     else:
         # Unknown or changed map: keep a conservative live-preview fallback.
         target = 45.0
         for row in rows:
             k = abs(row[1]) / max(0.35, 1.0 - abs(offset) * abs(row[1]))
             target = min(target, math.sqrt(10.0 * grip / max(k, .0001)
-                         + 2 * BRAKING_BUDGET * grip * max(0.0, row[0] - 10.0)))
+                         + 2 * FALLBACK_BRAKING * grip * max(0.0, row[0] - 10.0)))
         target = min(target, math.sqrt(10.0 * grip / max(abs(rows[0][1]), .0001)))
         feed_accel = 0.0
     heading = abs(angle(c['heading_error']))
@@ -148,27 +164,26 @@ def pedals(o, target, feed_accel, state, mode, allow_extra=False, offset=0.0):
     curve /= max(.35, 1.0 - c['n'] * curve)
     lateral = max(abs(c.get('g_lat', 0.0)) * 9.81, c['speed_mps'] ** 2 * abs(curve))
     utilization = lateral / max(.1, lateral_budget(curve) * grip)
-    accel_cap = 5.0 * grip * math.sqrt(max(0.0, 1.0 - min(1.0, utilization) ** 2))
-    # Extra propulsion is a conditional release of the V4 cap, not a faster
-    # corner target. High lateral load and every unstable state retain V4.
-    if (allow_extra and state is not None and error > .5
+    remaining = math.sqrt(max(0.0, 1.0 - min(1.0, utilization) ** 2))
+    accel_cap = ACCEL_BUDGET * grip * remaining
+    # Stable, nearly straight and well below target: the replay winners spend
+    # 30-70% of a lap at full throttle. Only in the conditions V5 already
+    # required for its extra release (map trusted, on line, no sliding).
+    full = (allow_extra and state is not None and error > 2.0
+            and utilization < .5
             and abs(angle(c['heading_error'])) < .10
             and abs(c['n'] - offset) < .75
             and abs(c['n']) < min(o['preview']['rows'][0][3:5]) - 1.7
             and c['fuel_kg'] >= 5.0
-            and not c.get('front_sliding', True) and not c.get('rear_sliding', True)):
-        release = clip((.85 - utilization) / .45, 0.0, 1.0)
-        remaining = math.sqrt(max(0.0, 1.0 - min(1.0, utilization) ** 2))
-        candidate = (5.0 + 5.0 * release) * grip * remaining
-        # Budget wheel force as well as net acceleration, so drag/uphill
-        # compensation cannot silently spend the whole traction reserve.
-        wheel_budget = 11.0 * grip * remaining - max(0.0, resistance) / mass
-        accel_cap = max(accel_cap, min(candidate, wheel_budget))
+            and (c['speed_mps'] > 20.0 or o['weather']['track_wetness'] < .5)
+            and not c.get('front_sliding', True) and not c.get('rear_sliding', True))
     if c.get('rear_sliding', False) or c.get('front_sliding', False):
         accel_cap = min(accel_cap, .8 * grip)
-    accel = clip(1.6 * error + feed_accel, -8.0 * grip, accel_cap)
+    accel = clip(1.6 * error + feed_accel, -(BRAKING_BUDGET + 4.0) * grip, accel_cap)
     requested_force = mass * accel + resistance
-    if requested_force >= 0.0:
+    if full:
+        throttle, brake = 1.0, 0.0
+    elif requested_force >= 0.0:
         throttle, brake = clip(requested_force / force[mode], 0.0, 1.0), 0.0
     else:
         throttle = 0.0
@@ -220,6 +235,21 @@ class Driver:
         self.yield_state = None
         self.yield_near = False
         self.rival_motion = {}
+        self.last_brake = 0.0
+        _GRIP_SCALE[0] = 1.0
+
+    def update_grip_scale(self, o, dt):
+        # If this car slides in a bend or under braking, trust less grip for a
+        # while (all speed targets and budgets scale with grip_budget). Pure
+        # straight-line wheelspin is already handled by the throttle limits.
+        c = o['self']
+        loaded = abs(c.get('g_lat', 0.0)) > .5 or self.last_brake > .05
+        sliding = (c.get('front_sliding', False)
+                   or (c.get('rear_sliding', False) and loaded))
+        if sliding and c['speed_mps'] > 15.0 and not c['pit_state']:
+            _GRIP_SCALE[0] = max(GRIP_SCALE_MIN, _GRIP_SCALE[0] - .15 * dt)
+        else:
+            _GRIP_SCALE[0] = min(1.0, _GRIP_SCALE[0] + .01 * dt)
 
     def reset_phase(self, o):
         c = o['self']
@@ -237,6 +267,8 @@ class Driver:
         self.yield_state = None
         self.yield_near = False
         self.rival_motion = {}
+        self.last_brake = 0.0
+        _GRIP_SCALE[0] = 1.0
 
     def choose_pit(self, o):
         c = o['self']
@@ -474,6 +506,7 @@ class Driver:
         c = o['self']
         dt = 1.0 / 30.0 if self.last_time is None else clip(o['time'] - self.last_time, 1.0 / 60.0, 0.1)
         self.last_time = o['time']
+        self.update_grip_scale(o, dt)
         state = map_state(o)
         initial_road, _ = road_plan(o, self.offset, state)
         target, offset = self.traffic_plan(o, initial_road, dt)
@@ -513,7 +546,9 @@ class Driver:
             # Preserve the original engine-controlled pit transit contract.
             throttle, brake, steer, boost = 0.0, 0.0, 0.0, False
             self.last_steer = 0.0
+        self.last_brake = brake
         self.diagnostic = dict(target=target, offset=offset, wet_race=self.wet_race,
+                               grip_scale=_GRIP_SCALE[0],
                                road_target=road_target, feed_accel=feed_accel, map_valid=state is not None,
                                extra_accel_enabled=allow_extra,
                                yield_seat=self.yield_seat, yield_state=self.yield_state,

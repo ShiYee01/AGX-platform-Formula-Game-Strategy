@@ -1,4 +1,4 @@
-"""Current V5 safety invariants, longitudinal recovery, and lapping decisions."""
+"""Frozen V5 (baselines/v5) safety invariants, longitudinal recovery, and lapping decisions."""
 import ast,copy,hashlib,importlib.util,json,math
 from pathlib import Path
 import unittest
@@ -8,7 +8,7 @@ def load(path,name):
     s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 
 v4=load(ROOT/'baselines/v4/agent.py','v4_baseline_current_tests')
-v5=load(ROOT/'agent/agent.py','v5_current_tests')
+v5=load(ROOT/'baselines/v5/agent.py','v5_frozen_tests')
 fixture=load(ROOT/'tests/test_control_v4.py','v4_fixture_current_tests')
 feedback=load(ROOT/'tools/feedback_v5.py','feedback_v5_tests')
 traffic=load(ROOT/'tests/test_traffic_v3.py','traffic_v5_tests')
@@ -36,7 +36,7 @@ def flat_state(o):
 
 class SafetyInvariants(unittest.TestCase):
     def test_v4_geometry_steering_and_speed_safety_are_unchanged(self):
-        trees=[ast.parse((ROOT/p).read_text()) for p in ('baselines/v4/agent.py','agent/agent.py')]
+        trees=[ast.parse((ROOT/p).read_text()) for p in ('baselines/v4/agent.py','baselines/v5/agent.py')]
         for name in ('clip','angle','grip_budget','interpolate','lateral_budget','map_state','road_plan','plan_speed','steer_command','pit_entry_distance'):
             nodes=[next(n for n in t.body if isinstance(n,ast.FunctionDef) and n.name==name) for t in trees]
             self.assertEqual(ast.dump(nodes[0],include_attributes=False),ast.dump(nodes[1],include_attributes=False),name)
@@ -47,7 +47,7 @@ class SafetyInvariants(unittest.TestCase):
         self.assertEqual(v4.BRAKING_BUDGET,v5.BRAKING_BUDGET)
 
     def test_design_bytes_unchanged(self):
-        self.assertEqual((ROOT/'agent/design.json').read_bytes(),(ROOT/'baselines/v4/design.json').read_bytes())
+        self.assertEqual((ROOT/'baselines/v5/design.json').read_bytes(),(ROOT/'baselines/v4/design.json').read_bytes())
 
     def test_braking_command_unchanged_with_extra_enabled(self):
         for wet in (0.,.5,1.):
